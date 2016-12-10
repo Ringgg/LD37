@@ -1,13 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class DangerCircle : Danger
+public class DangerCircle : AreaDanger
 {
     public float radius = 3;
-    public float damage = 20f;
-
-    List<Hero> heroesIn = new List<Hero>();
-    Hero tmp;
 
     public override bool IsInDanger(Hero hero)
     {
@@ -18,34 +14,11 @@ public class DangerCircle : Danger
     {
         Vector3 dest = -(transform.position - hero.transform.position);
         dest.y = hero.transform.position.y;
-        return hero.transform.position + dest.normalized * (radius + 0.5f);
-    }
-
-    public void OnTriggerEnter(Collider col)
-    {
-        tmp = col.GetComponent<Hero>();
-        if (tmp == null) return;
-        heroesIn.Add(tmp);
-    }
-
-    public void OnTriggerExit(Collider col)
-    {
-        tmp = col.GetComponent<Hero>();
-        if (tmp == null) return;
-        heroesIn.Remove(tmp);
-    }
-
-    protected void GiveDamageInRadius()
-    {
-        foreach (var hero in heroesIn)
-        {
-            if (hero == null) continue;
-            hero.TakeDamage(damage);
-        }
-    }
+        return dest.normalized * (radius + 0.5f);
+    }  
 
     void OnDestroy()
     {
-        GiveDamageInRadius();
+        GiveHeroesDamage();
     }
 }

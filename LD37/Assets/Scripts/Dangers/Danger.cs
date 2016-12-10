@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Danger : MonoBehaviour
 {
     public int priority;
+    protected List<Hero> heroesIn = new List<Hero>();
 
     public virtual bool IsInDanger(Hero hero)
     {
