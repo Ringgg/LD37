@@ -55,7 +55,17 @@ public class PhaseExplosionSpam : PhaseBase
 
         if (spawnDelayTimer == 0.0f)
         {
-            EffectSpawner.SpawnDotCircle(Vector3.zero);
+            RaycastHit hitInfo;
+            Ray r = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Vector3 point;
+
+            if (!Physics.Raycast(r, out hitInfo))
+                return;
+
+            point = hitInfo.point + Random.insideUnitSphere * explosionScatterRadius;
+            point.y = 0;
+
+            EffectSpawner.SpawnDotCircle(point);
             spawnDelayTimer = explosionSpawnDelay;
         }
     }

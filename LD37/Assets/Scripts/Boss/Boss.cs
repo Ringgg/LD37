@@ -3,17 +3,21 @@ using System.Collections.Generic;
 
 public class Boss : MonoBehaviour
 {
-    public PhaseDefault curPhase;
-    public PhaseDefault defaultPhase;
-    public PhaseDefault healPhase;
-    public PhaseDefault aoePhase;
+    public PhaseBase curPhase;
+    public PhaseBase defaultPhase;
+    public PhaseBase healPhase;
+    public PhaseBase aoePhase;
     public Movement movement;
     
     public void Awake()
     {
         movement = GetComponent<Movement>();
+    }
 
+    void Start()
+    {
         EventManager.StartListening(EventType.EndAoePhase, GoDefault);
+        GoDefault();
     }
 
     void Update()
@@ -34,11 +38,11 @@ public class Boss : MonoBehaviour
     public void GoExplosionSpam() { GoToPhase(aoePhase); }
     public void GoHeal() { GoToPhase(healPhase); }
 
-    public void GoToPhase(PhaseDefault phase)
+    public void GoToPhase(PhaseBase phase)
     {
         curPhase.EndPhase();
         curPhase = phase;
-        curPhase.EndPhase();
+        curPhase.StartPhase();
     }
 
     public void WalkTo(Vector3 position)
@@ -48,6 +52,6 @@ public class Boss : MonoBehaviour
 
     bool IsInDefault()
     {
-        return curPhase = defaultPhase;
+        return curPhase == defaultPhase;
     }
 }
