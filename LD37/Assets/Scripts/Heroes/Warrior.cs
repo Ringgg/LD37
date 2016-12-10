@@ -47,7 +47,7 @@ public class Warrior : Hero
     {
         strikeTimer = strikeDelay * Random.Range(0.75f, 1.25f);
 
-        Vector3 dir = (Boss.instance.transform.position - transform.position).normalized;
+        Vector3 dir = (Boss.instance.transform.position - transform.position).normalized * 0.5f;
         Boss.instance.GetComponent<Rigidbody>().AddForce(dir, ForceMode.VelocityChange);
     }
 }
