@@ -8,17 +8,19 @@ public class Hero : MonoBehaviour
     public static List<Danger> dangers = new List<Danger>();
     public float hp = 100;
     private float startHP;
-    Movement movement;
-    private HighlightColorChanger highlightColorChanger;
+    protected Movement movement;
+    protected HighlightColorChanger highlightColorChanger;
+    public bool isInDanger;
 
-    public void Awake()
+
+    public virtual void Awake()
     {
         startHP = hp;
         movement = GetComponent<Movement>();
         highlightColorChanger = GetComponentInChildren<HighlightColorChanger>();
     }
 
-    public void Update()
+    public virtual void Update()
     {
         TestDangers();
         CheckIfAlive();
@@ -31,9 +33,11 @@ public class Hero : MonoBehaviour
             if (dangers[i].IsInDanger(this))
             {
                 movement.GoTo(dangers[i].GetEscapePosition(this));
-                break;
+                isInDanger = true;
+                return;
             }
         }
+        isInDanger = false;
     }
 
     public void TakeDamage(float ammount)

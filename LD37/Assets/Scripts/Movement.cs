@@ -19,8 +19,8 @@ public class Movement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        if (name != "Boss")
-            InvokeRepeating("GoTo", 0, 3);
+        //if (name != "Boss")
+        //    InvokeRepeating("GoTo", 0, 3);
     }
 
     void FixedUpdate()
@@ -65,7 +65,7 @@ public class Movement : MonoBehaviour
         dir *= desiredSpeed;
         dir.y = rb.velocity.y;
 
-        rb.velocity = Vector3.MoveTowards(rb.velocity, dir, speed * Time.deltaTime);
+        rb.velocity = Vector3.MoveTowards(rb.velocity, dir, speed * Time.deltaTime * 2);
 
         Rotate();
     }

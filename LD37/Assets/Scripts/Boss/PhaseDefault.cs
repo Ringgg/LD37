@@ -79,7 +79,7 @@ public class PhaseDefault : PhaseBase
         hitCdTimer = hitCd;
         target.GetThrown(1.0f);
 
-        Vector3 dir = (target.transform.position - transform.position).normalized;
+        Vector3 dir = (target.transform.position - transform.position).normalized + Vector3.up;
         target.TakeDamage(nextHitStrong ? strongDamage : baseDamage);
         target.GetComponent<Rigidbody>().AddForce(dir * (nextHitStrong ? strongKnockback : baseKnockback), ForceMode.Impulse);
     }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 public class Boss : MonoBehaviour
 {
+    public static Boss instance;
+
     public PhaseBase curPhase;
     public PhaseBase defaultPhase;
     public PhaseBase healPhase;
@@ -11,6 +13,7 @@ public class Boss : MonoBehaviour
     
     public void Awake()
     {
+        instance = this;
         movement = GetComponent<Movement>();
     }
 

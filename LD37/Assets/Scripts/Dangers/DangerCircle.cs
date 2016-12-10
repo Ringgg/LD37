@@ -18,9 +18,8 @@ public class DangerCircle : Danger
     {
         Vector3 dest = -(transform.position - hero.transform.position);
         dest.y = hero.transform.position.y;
-        return dest.normalized * (radius + 0.5f);
+        return hero.transform.position + dest.normalized * (radius + 0.5f);
     }
-
 
     public void OnTriggerEnter(Collider col)
     {
