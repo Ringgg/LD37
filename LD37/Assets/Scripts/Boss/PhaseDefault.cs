@@ -43,19 +43,19 @@ public class PhaseDefault : PhaseBase
         }
     }
 
-    public virtual void StartPhase()
+    public override void StartPhase()
     {
         base.StartPhase();
         target = null;
     }
 
-    public virtual void EndPhase()
+    public override void EndPhase()
     {
         base.EndPhase();
         target = null;
     }
 
-    public virtual void LeftClick()
+    public override void LeftClick()
     {
         RaycastHit hitInfo;
         Ray r = Camera.main.ScreenPointToRay(Input.mousePosition);

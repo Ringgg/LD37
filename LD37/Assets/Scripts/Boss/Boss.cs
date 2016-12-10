@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 public class Boss : MonoBehaviour
 {
-    public PhaseDefault curPhase;
-    public PhaseDefault defaultPhase;
-    public PhaseDefault healPhase;
-    public PhaseDefault aoePhase;
+    public PhaseBase curPhase;
+    public PhaseBase defaultPhase;
+    public PhaseBase healPhase;
+    public PhaseBase aoePhase;
     public Movement movement;
     
     public void Awake()
@@ -14,26 +14,35 @@ public class Boss : MonoBehaviour
         movement = GetComponent<Movement>();
     }
 
+    void Start()
+    {
+        EventManager.StartListening(EventType.EndAoePhase, GoDefault);
+        GoDefault();
+    }
+
     void Update()
     {
         if (curPhase == defaultPhase)
         {
             if (Input.GetKeyDown(KeyCode.Q) && IsInDefault() && aoePhase.CanSwitch())
-                GoToPhase(aoePhase);
+                GoExplosionSpam();
             if (Input.GetKeyDown(KeyCode.Q) && IsInDefault() && healPhase.CanSwitch())
                 GoToPhase(healPhase);
         }
-
-
+        
         if (Input.GetMouseButtonDown(0)) curPhase.LeftClick();
         if (Input.GetMouseButtonDown(1)) curPhase.RightClick();
     }
 
-    public void GoToPhase(PhaseDefault phase)
+    public void GoDefault() { GoToPhase(defaultPhase); }
+    public void GoExplosionSpam() { GoToPhase(aoePhase); }
+    public void GoHeal() { GoToPhase(healPhase); }
+
+    public void GoToPhase(PhaseBase phase)
     {
         curPhase.EndPhase();
         curPhase = phase;
-        curPhase.EndPhase();
+        curPhase.StartPhase();
     }
 
     public void WalkTo(Vector3 position)
@@ -43,6 +52,6 @@ public class Boss : MonoBehaviour
 
     bool IsInDefault()
     {
-        return curPhase = defaultPhase;
+        return curPhase == defaultPhase;
     }
 }
