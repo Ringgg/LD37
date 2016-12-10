@@ -29,6 +29,7 @@ public class PhraseZoneDamage : PhaseBase
 
     public override void LeftClick()
     {
+        if(zoneActivateInRound) return;
         RaycastHit hitInfo;
         Ray r = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -61,6 +62,8 @@ public class PhraseZoneDamage : PhaseBase
         else if (zone.GetComponent<ExplosionPlane>())
         {
             zone.GetComponent<ExplosionPlane>().enabled = enabled;
+            if (!enabled) return;
+            zone.GetComponent<ExplosionPlane>().GiveDamage();
         }
     }
 }

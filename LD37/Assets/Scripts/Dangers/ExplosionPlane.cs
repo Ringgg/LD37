@@ -2,7 +2,11 @@
 
 public class ExplosionPlane : AreaDanger
 {
-    public ExplosionPlane secondPlane;
+    public CooldownPlane secondPlane;
+    public void GiveDamage()
+    {
+        GiveHeroesDamage();
+    }
 
     public override bool IsInDanger(Hero hero)
     {
@@ -22,10 +26,5 @@ public class ExplosionPlane : AreaDanger
         }
         dest.y = hero.transform.position.y;
         return hero.transform.position + dest.normalized;
-    }
-
-    void OnDestroy()
-    {
-        GiveHeroesDamage();
     }
 }
