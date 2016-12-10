@@ -45,4 +45,14 @@ public class Hero : MonoBehaviour
     {
         dangers.Remove(danger);
     }
+
+    private void CheckIfAlive()
+    {
+        if (hp <= 0) Die();
+    }
+
+    public void Die()
+    {
+        Destroy(gameObject);
+    }
 }
