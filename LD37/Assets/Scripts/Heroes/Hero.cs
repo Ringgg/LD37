@@ -1,16 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.UI;
 
 public class Hero : MonoBehaviour
 {
     public static List<Danger> dangers = new List<Danger>();
     public float hp = 100;
+    private float startHP;
     Movement movement;
+    private HighlightColorChanger highlightColorChanger;
 
     public void Start()
     {
+        startHP = hp;
         movement = GetComponent<Movement>();
+        highlightColorChanger = GetComponentInChildren<HighlightColorChanger>();
     }
 
     public void Update()
@@ -34,6 +39,7 @@ public class Hero : MonoBehaviour
     public void TakeDamage(float ammount)
     {
         hp = Mathf.Max(0, hp - ammount);
+        highlightColorChanger.ChangeHighlightColor(hp,startHP);
     }
     
     public static void AddDanger(Danger danger)
