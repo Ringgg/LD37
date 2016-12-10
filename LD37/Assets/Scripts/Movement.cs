@@ -72,7 +72,7 @@ public class Movement : MonoBehaviour
 
     void Rotate()
     {
-        dir.y = transform.position.y;
+        dir.y = 0;
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir, Vector3.up), Time.deltaTime * 5);
     }
 
