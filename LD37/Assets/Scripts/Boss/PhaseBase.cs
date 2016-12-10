@@ -25,7 +25,6 @@ public class PhaseBase : MonoBehaviour
         return available && !active && cooldownTimer == 0;
     }
 
-
     public virtual void StartPhase()
     {
         active = true;

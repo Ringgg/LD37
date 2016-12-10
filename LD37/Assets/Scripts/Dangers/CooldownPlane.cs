@@ -7,7 +7,7 @@ public class CooldownPlane : ExplosionPlane
 {
     public float delay = .5f;
 
-    void Awake()
+    public void StartDamagingHeroes()
     {
         InvokeRepeating("GiveHeroesDamage", 0, delay);
     }

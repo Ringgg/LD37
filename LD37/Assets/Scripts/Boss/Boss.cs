@@ -8,6 +8,7 @@ public class Boss : MonoBehaviour
     public PhaseBase curPhase;
     public PhaseBase defaultPhase;
     public PhaseBase healPhase;
+    public PhaseBase zonePhase;
     public PhaseBase aoePhase;
     public Movement movement;
     
@@ -20,6 +21,7 @@ public class Boss : MonoBehaviour
     void Start()
     {
         EventManager.StartListening(EventType.EndAoePhase, GoDefault);
+        EventManager.StartListening(EventType.EndZonePhase, GoDefault);
         GoDefault();
     }
 
@@ -31,6 +33,8 @@ public class Boss : MonoBehaviour
                 GoExplosionSpam();
             if (Input.GetKeyDown(KeyCode.Q) && IsInDefault() && healPhase.CanSwitch())
                 GoToPhase(healPhase);
+            if (Input.GetKeyDown(KeyCode.R) && IsInDefault() && zonePhase.CanSwitch())
+                GoZone();
         }
         
         if (Input.GetMouseButtonDown(0)) curPhase.LeftClick();
@@ -40,6 +44,7 @@ public class Boss : MonoBehaviour
     public void GoDefault() { GoToPhase(defaultPhase); }
     public void GoExplosionSpam() { GoToPhase(aoePhase); }
     public void GoHeal() { GoToPhase(healPhase); }
+    public void GoZone() { GoToPhase(zonePhase); }
 
     public void GoToPhase(PhaseBase phase)
     {
