@@ -11,7 +11,7 @@ public class Hero : MonoBehaviour
     Movement movement;
     private HighlightColorChanger highlightColorChanger;
 
-    public void Start()
+    public void Awake()
     {
         startHP = hp;
         movement = GetComponent<Movement>();
@@ -61,5 +61,10 @@ public class Hero : MonoBehaviour
     public void Die()
     {
         Destroy(gameObject);
+    }
+
+    public void GetThrown(float forTime = 1.0f)
+    {
+        movement.GetThrown(forTime);
     }
 }
