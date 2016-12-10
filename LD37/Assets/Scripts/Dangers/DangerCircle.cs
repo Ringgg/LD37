@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class DangerCircle : Danger
 {
     public float radius = 3;
-    public float explosionDamage = 20f;
+    public float damage = 20f;
 
     List<Hero> heroesIn = new List<Hero>();
     Hero tmp;
@@ -36,17 +36,17 @@ public class DangerCircle : Danger
         heroesIn.Remove(tmp);
     }
 
-    protected void GiveDamageInRadius(float amount)
+    protected void GiveDamageInRadius()
     {
         foreach (var hero in heroesIn)
         {
             if (hero == null) continue;
-            hero.TakeDamage(amount);
+            hero.TakeDamage(damage);
         }
     }
 
     void OnDestroy()
     {
-        GiveDamageInRadius(explosionDamage);
+        GiveDamageInRadius();
     }
 }
