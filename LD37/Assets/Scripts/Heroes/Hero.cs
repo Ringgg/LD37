@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine.UI;
 
 public class Hero : MonoBehaviour
 {
+    public static List<Hero> heroes = new List<Hero>();
     public static List<Danger> dangers = new List<Danger>();
     public float hp = 100;
     private float startHP;
@@ -18,6 +18,7 @@ public class Hero : MonoBehaviour
         startHP = hp;
         movement = GetComponent<Movement>();
         highlightColorChanger = GetComponentInChildren<HighlightColorChanger>();
+        heroes.Add(this);
     }
 
     public virtual void Update()

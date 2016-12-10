@@ -5,17 +5,19 @@ public class PhaseDefault : PhaseBase
 {
     Hero target;
 
-    public float baseKnockback = 2.0f;
-    public float strongKnockback = 5.0f;
+    public float slamRange = 6.0f;
+    public float slamKnockback = 20.0f;
+    public float slamDamage = 80.0f;
+    public float slamCd = 10.0f;
 
+    public float baseKnockback = 2.0f;
     public float baseDamage = 10.0f;
-    public float strongDamage = 15.0f;
-    
     public float hitCd = 2;
 
     public bool nextHitStrong;
 
     float hitCdTimer;
+    float slamCdTimer;
 
     void Awake()
     {
@@ -29,6 +31,8 @@ public class PhaseDefault : PhaseBase
         if (active)
         {
             hitCdTimer = Mathf.MoveTowards(hitCdTimer, 0, Time.deltaTime);
+            slamCdTimer = Mathf.MoveTowards(slamCdTimer, 0, Time.deltaTime);
+
             if (target != null)
             {
                 Chase();
@@ -72,6 +76,42 @@ public class PhaseDefault : PhaseBase
         }
     }
 
+    // slam the ground in a 45 degree cone
+    public override void RightClick()
+    {
+        float effect;
+
+        if (slamCdTimer > 0)
+            return;
+
+        movement.Halt();
+
+        for (int i = Hero.heroes.Count -1; i >= 0; --i)
+        {
+            target = Hero.heroes[i];
+
+            if (target == null)
+                continue;
+
+            effect = 1 - Vector3.Distance(transform.position, target.transform.position) / slamRange;
+
+            if (effect < 0.0f)
+                continue;
+
+            if (Vector3.Dot(transform.forward, (target.transform.position - transform.position).normalized) < 0.5f)
+                continue;
+
+            target.GetThrown(1.0f);
+
+            Vector3 dir = (target.transform.position - transform.position).normalized + Vector3.up;
+            target.TakeDamage(slamDamage);
+            target.GetComponent<Rigidbody>().AddForce(dir * (slamKnockback), ForceMode.Impulse);
+        }
+
+        target = null;
+        slamCdTimer = slamCd;
+    }
+
     void Hit()
     {
         // play animation
@@ -80,8 +120,8 @@ public class PhaseDefault : PhaseBase
         target.GetThrown(1.0f);
 
         Vector3 dir = (target.transform.position - transform.position).normalized + Vector3.up;
-        target.TakeDamage(nextHitStrong ? strongDamage : baseDamage);
-        target.GetComponent<Rigidbody>().AddForce(dir * (nextHitStrong ? strongKnockback : baseKnockback), ForceMode.Impulse);
+        target.TakeDamage(baseDamage);
+        target.GetComponent<Rigidbody>().AddForce(dir * (baseKnockback), ForceMode.Impulse);
     }
 
     void Chase()
