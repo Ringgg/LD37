@@ -76,6 +76,12 @@ public class Movement : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir, Vector3.up), Time.deltaTime * 5);
     }
 
+    public void Halt()
+    {
+        walking = false;
+        stopping = true;
+    }
+
     public void GoTo(Vector3 position)
     {
         destination = position;
