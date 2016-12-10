@@ -3,10 +3,16 @@ using System.Collections.Generic;
 
 public class Boss : MonoBehaviour
 {
-    BossPhase curPhase;
-    BossPhase defaultPhase;
-    BossPhase healPhase;
-    BossPhase aoePhase;
+    public BossPhase curPhase;
+    public BossPhase defaultPhase;
+    public BossPhase healPhase;
+    public BossPhase aoePhase;
+    public Movement movement;
+    
+    public void Awake()
+    {
+        movement = GetComponent<Movement>();
+    }
 
     void Update()
     {
@@ -28,6 +34,11 @@ public class Boss : MonoBehaviour
         curPhase.EndPhase();
         curPhase = phase;
         curPhase.EndPhase();
+    }
+
+    public void WalkTo(Vector3 position)
+    {
+        movement.GoTo(position);
     }
 
     bool IsInDefault()

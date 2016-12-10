@@ -5,10 +5,10 @@ public class Movement : MonoBehaviour
 {
     public Vector3 destination;
     public float speed = 5;
-
-    bool walking;
-    bool stopping;
-    bool thrown;
+    public float stoppingDist = 0.5f;
+    public bool walking;
+    public bool stopping;
+    public bool thrown;
 
     Rigidbody rb;
 
@@ -19,14 +19,18 @@ public class Movement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        InvokeRepeating("GoTo", 0, 3);
+        if (name != "Boss")
+            InvokeRepeating("GoTo", 0, 3);
     }
 
     void FixedUpdate()
     {
-        if (thrown)        Fly();
-        else if (walking)  Walk();
-        else if (stopping) Stop();
+        if (thrown) Fly();
+        else
+        {
+            if (walking) Walk();
+            if (stopping) Stop();
+        }
     }
 
     public void Fly()
@@ -46,7 +50,7 @@ public class Movement : MonoBehaviour
     {
         dir = (destination - transform.position);
 
-        if (dir.sqrMagnitude < 0.5f)
+        if (dir.sqrMagnitude < stoppingDist * stoppingDist)
         {
             walking = false;
             stopping = true;
@@ -68,6 +72,7 @@ public class Movement : MonoBehaviour
 
     void Rotate()
     {
+        dir.y = transform.position.y;
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir, Vector3.up), Time.deltaTime * 5);
     }
 
@@ -84,5 +89,17 @@ public class Movement : MonoBehaviour
         destination = position;
         walking = true;
         stopping = false;
+    }
+
+    public void GetThrown(float forTime)
+    {
+        thrown = true;
+        rb.drag = 1.0f;
+        Invoke("Unthrow", forTime);
+    }
+
+    void Unthrow()
+    {
+        thrown = false;
     }
 }

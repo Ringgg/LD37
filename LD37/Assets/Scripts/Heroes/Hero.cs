@@ -8,7 +8,7 @@ public class Hero : MonoBehaviour
     public float hp;
     Movement movement;
 
-    public void Start()
+    public void Awake()
     {
         movement = GetComponent<Movement>();
     }
@@ -54,5 +54,10 @@ public class Hero : MonoBehaviour
     public void Die()
     {
         Destroy(gameObject);
+    }
+
+    public void GetThrown(float forTime = 1.0f)
+    {
+        movement.GetThrown(forTime);
     }
 }
