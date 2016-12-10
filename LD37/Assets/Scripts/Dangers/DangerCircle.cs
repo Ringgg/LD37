@@ -14,7 +14,7 @@ public class DangerCircle : AreaDanger
     {
         Vector3 dest = -(transform.position - hero.transform.position);
         dest.y = hero.transform.position.y;
-        return dest.normalized * (radius + 0.5f);
+        return hero.transform.position + dest.normalized * (radius + 0.5f);
     }  
 
     void OnDestroy()
