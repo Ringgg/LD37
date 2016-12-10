@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 public class Boss : MonoBehaviour
 {
-    public BossPhase curPhase;
-    public BossPhase defaultPhase;
-    public BossPhase healPhase;
-    public BossPhase aoePhase;
+    public PhaseDefault curPhase;
+    public PhaseDefault defaultPhase;
+    public PhaseDefault healPhase;
+    public PhaseDefault aoePhase;
     public Movement movement;
     
     public void Awake()
@@ -29,7 +29,7 @@ public class Boss : MonoBehaviour
         if (Input.GetMouseButtonDown(1)) curPhase.RightClick();
     }
 
-    public void GoToPhase(BossPhase phase)
+    public void GoToPhase(PhaseDefault phase)
     {
         curPhase.EndPhase();
         curPhase = phase;

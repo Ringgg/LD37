@@ -1,10 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BossPhase : MonoBehaviour
+public class PhaseDefault : PhaseBase
 {
-    Boss controller;
-    Movement movement;
     Hero target;
 
     public float baseKnockback = 2.0f;
@@ -12,17 +10,11 @@ public class BossPhase : MonoBehaviour
 
     public float baseDamage = 10.0f;
     public float strongDamage = 15.0f;
-
-    public float cooldown = 60;
-    public float duration = 15;
+    
     public float hitCd = 2;
 
-    public bool available;
-    public bool active;
     public bool nextHitStrong;
 
-    float cooldownTimer;
-    float durationTimer;
     float hitCdTimer;
 
     void Awake()
@@ -31,11 +23,11 @@ public class BossPhase : MonoBehaviour
         movement = GetComponent<Movement>();
     }
 
-    protected virtual void Update()
+    protected override void Update()
     {
+        base.Update();
         if (active)
         {
-            durationTimer = Mathf.MoveTowards(durationTimer, 0, Time.deltaTime);
             hitCdTimer = Mathf.MoveTowards(hitCdTimer, 0, Time.deltaTime);
             if (target != null)
             {
@@ -49,28 +41,18 @@ public class BossPhase : MonoBehaviour
                 movement.stoppingDist = 0.5f;
             }
         }
-        else
-            cooldownTimer = Mathf.MoveTowards(cooldownTimer, 0, Time.deltaTime);
-
-    }
-
-    public virtual bool CanSwitch()
-    {
-        return available && !active && cooldownTimer == 0;
     }
 
     public virtual void StartPhase()
     {
+        base.StartPhase();
         target = null;
-        active = true;
-        cooldownTimer = cooldown;
-        durationTimer = duration;
     }
 
     public virtual void EndPhase()
     {
+        base.EndPhase();
         target = null;
-        active = false;
     }
 
     public virtual void LeftClick()
@@ -88,11 +70,6 @@ public class BossPhase : MonoBehaviour
             movement.stoppingDist = 0.5f;
             movement.GoTo(hitInfo.point);
         }
-    }
-
-    public virtual void RightClick()
-    {
-
     }
 
     void Hit()
