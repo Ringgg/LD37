@@ -6,6 +6,7 @@ public enum EventType
     BossAtHalfHp,
     EndAoePhase,
     EndHealPhase,
+    EndZonePhase,
 }
 
 class ObjectEvent

@@ -22,7 +22,7 @@ public class ExplosionPlane : AreaDanger
         }
         dest.y = hero.transform.position.y;
         return hero.transform.position + dest.normalized;
-    }
+    }
 
     void OnDestroy()
     {
