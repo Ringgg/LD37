@@ -12,6 +12,8 @@ public class Boss : MonoBehaviour
     public void Awake()
     {
         movement = GetComponent<Movement>();
+
+        EventManager.StartListening(EventType.EndAoePhase, GoDefault);
     }
 
     void Update()
@@ -19,15 +21,18 @@ public class Boss : MonoBehaviour
         if (curPhase == defaultPhase)
         {
             if (Input.GetKeyDown(KeyCode.Q) && IsInDefault() && aoePhase.CanSwitch())
-                GoToPhase(aoePhase);
+                GoExplosionSpam();
             if (Input.GetKeyDown(KeyCode.Q) && IsInDefault() && healPhase.CanSwitch())
                 GoToPhase(healPhase);
         }
-
-
+        
         if (Input.GetMouseButtonDown(0)) curPhase.LeftClick();
         if (Input.GetMouseButtonDown(1)) curPhase.RightClick();
     }
+
+    public void GoDefault() { GoToPhase(defaultPhase); }
+    public void GoExplosionSpam() { GoToPhase(aoePhase); }
+    public void GoHeal() { GoToPhase(healPhase); }
 
     public void GoToPhase(PhaseDefault phase)
     {
