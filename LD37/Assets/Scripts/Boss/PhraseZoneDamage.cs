@@ -17,6 +17,12 @@ public class PhraseZoneDamage : PhaseBase
         }
     }
 
+    public override void StartPhase()
+    {
+        base.StartPhase();
+        AddMouseHovers();
+    }
+
     public override void EndPhase()
     {
         base.EndPhase();
@@ -29,7 +35,7 @@ public class PhraseZoneDamage : PhaseBase
 
     public override void LeftClick()
     {
-        if(zoneActivateInRound) return;
+        if (zoneActivateInRound) return;
         RaycastHit hitInfo;
         Ray r = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -40,30 +46,66 @@ public class PhraseZoneDamage : PhaseBase
         if (Zones.Contains(zone))
         {
             EnableComponent(zone, true);
+            DestroyMouseHovers();
             zoneActivateInRound = true;
         }
     }
+
+
 
     void EnableComponent(GameObject zone, bool enabled)
     {
         if (zone.GetComponent<CooldownPlane>())
         {
-            var cd = zone.GetComponent<CooldownPlane>();
-            cd.enabled = enabled;
+            var cooldownPlane = zone.GetComponent<CooldownPlane>();
+            cooldownPlane.enabled = enabled;
             if (enabled)
             {
-                cd.StartDamagingHeroes();
+                cooldownPlane.StartDamagingHeroes();
             }
             else
             {
-                cd.CancelInvoke();
+                cooldownPlane.CancelInvoke();
             }
         }
         else if (zone.GetComponent<ExplosionPlane>())
         {
-            zone.GetComponent<ExplosionPlane>().enabled = enabled;
+            var explosionPlane = zone.GetComponent<ExplosionPlane>();
+            explosionPlane.enabled = enabled;
             if (!enabled) return;
-            zone.GetComponent<ExplosionPlane>().GiveDamage();
+            explosionPlane.GiveDamage();
+            foreach (var particle in explosionPlane.GetComponentsInChildren<ParticleSystem>())
+            {
+                particle.Play();
+            }
+
+        }
+        else if (zone.GetComponent<ExternalDanger>())
+        {
+            //foreach (var externalZone in Zones)
+            //{
+            //    if (!externalZone.GetComponent<ExternalDanger>()) continue;
+                var externalDanger = zone.GetComponent<ExternalDanger>();
+                externalDanger.enabled = enabled;
+            //}
+
+        }
+    }
+
+    private void AddMouseHovers()
+    {
+        foreach (var zone in Zones)
+        {
+            zone.AddComponent<MouseHover>();
+        }
+    }
+
+    private void DestroyMouseHovers()
+    {
+        foreach (var zone in Zones)
+        {
+            zone.GetComponent<MouseHover>().ReturnToStartColor();
+            Destroy(zone.GetComponent<MouseHover>());
         }
     }
 }
