@@ -5,7 +5,7 @@ using System.Linq;
 public class Hero : MonoBehaviour
 {
     public static List<Danger> dangers = new List<Danger>();
-    public float hp;
+    public float hp = 100;
     Movement movement;
 
     public void Start()
@@ -16,6 +16,7 @@ public class Hero : MonoBehaviour
     public void Update()
     {
         TestDangers();
+        CheckIfAlive();
     }
 
     void TestDangers()
