@@ -7,6 +7,8 @@ public class EffectSpawner : MonoBehaviour
     public GameObject dotCircle;
     public GameObject explosionCircle;
 
+    public GameObject explosionParticle;
+
     public GameObject arrow;
 
     public static void SpawnDotCircle(Vector3 position)
@@ -19,6 +21,11 @@ public class EffectSpawner : MonoBehaviour
         Instantiate(instance.explosionCircle, position, Quaternion.identity);
     }
     
+    public static void SpawnExplosionParticle(Vector3 position)
+    {
+        Instantiate(instance.explosionParticle, position, Quaternion.identity);
+    }
+
     public static void SpawnArrow(Vector3 position)
     {
         Instantiate(instance.arrow, position, Quaternion.identity);

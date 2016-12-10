@@ -20,5 +20,6 @@ public class DangerCircle : AreaDanger
     void OnDestroy()
     {
         GiveHeroesDamage();
+        EffectSpawner.SpawnExplosionParticle(transform.position);
     }
 }
