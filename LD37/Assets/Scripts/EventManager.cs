@@ -7,6 +7,7 @@ public enum EventType
     EndAoePhase,
     EndHealPhase,
     EndZonePhase,
+    EndGasPhase,
 }
 
 class ObjectEvent

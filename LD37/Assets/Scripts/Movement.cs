@@ -37,7 +37,7 @@ public class Movement : MonoBehaviour
     {
         rb.velocity = Vector3.MoveTowards(rb.velocity, Vector3.zero, speed * Time.deltaTime);
         stopping = false;
-        if (rb.velocity.sqrMagnitude < 0.01f)
+        if (rb.velocity.sqrMagnitude < 0.01f && transform.position.y < 0.5f)
             thrown = false;
     }
 
@@ -100,6 +100,7 @@ public class Movement : MonoBehaviour
     public void GetThrown(float forTime)
     {
         thrown = true;
+        stopping = false;
         rb.drag = 1.0f;
         Invoke("Unthrow", forTime);
     }

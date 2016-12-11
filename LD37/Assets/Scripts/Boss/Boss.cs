@@ -10,6 +10,7 @@ public class Boss : MonoBehaviour
     public PhaseBase healPhase;
     public PhaseBase zonePhase;
     public PhaseBase aoePhase;
+    public PhaseBase gasPhase;
     public Movement movement;
     
     public void Awake()
@@ -22,6 +23,7 @@ public class Boss : MonoBehaviour
     {
         EventManager.StartListening(EventType.EndAoePhase, GoDefault);
         EventManager.StartListening(EventType.EndZonePhase, GoDefault);
+        EventManager.StartListening(EventType.EndGasPhase, GoDefault);
         GoDefault();
     }
 
@@ -31,10 +33,12 @@ public class Boss : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Q) && IsInDefault() && aoePhase.CanSwitch())
                 GoExplosionSpam();
-            if (Input.GetKeyDown(KeyCode.Q) && IsInDefault() && healPhase.CanSwitch())
+            if (Input.GetKeyDown(KeyCode.W) && IsInDefault() && healPhase.CanSwitch())
                 GoToPhase(healPhase);
-            if (Input.GetKeyDown(KeyCode.R) && IsInDefault() && zonePhase.CanSwitch())
+            if (Input.GetKeyDown(KeyCode.E) && IsInDefault() && zonePhase.CanSwitch())
                 GoZone();
+            if (Input.GetKeyDown(KeyCode.R) && IsInDefault() && gasPhase.CanSwitch())
+                GoGas();
         }
         
         if (Input.GetMouseButtonDown(0)) curPhase.LeftClick();
@@ -45,6 +49,7 @@ public class Boss : MonoBehaviour
     public void GoExplosionSpam() { GoToPhase(aoePhase); }
     public void GoHeal() { GoToPhase(healPhase); }
     public void GoZone() { GoToPhase(zonePhase); }
+    public void GoGas() { GoToPhase(gasPhase); }
 
     public void GoToPhase(PhaseBase phase)
     {
