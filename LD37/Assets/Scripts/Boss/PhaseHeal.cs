@@ -55,6 +55,7 @@ public class PhaseHeal : PhaseBase
         base.EndPhase();
         CancelInvoke();
         DestroyHealObjects();
+        healObjects.Clear();
     }
 
     // slam the ground in a 45 degree cone

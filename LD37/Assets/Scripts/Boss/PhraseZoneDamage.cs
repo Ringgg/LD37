@@ -7,35 +7,37 @@ using UnityEngine;
 public class PhraseZoneDamage : PhaseBase
 {
     public List<GameObject> Zones;
-    private bool zoneActivateInRound;
+    public float zoneActivationDelay = 5f;
+
+    private float zoneActivationTimer;
+
     void Update()
     {
         base.Update();
         if (active)
         {
             if (durationTimer == 0) EventManager.TriggerEvent(EventType.EndZonePhase);
+            zoneActivationTimer = Mathf.MoveTowards(zoneActivationTimer, 0, Time.deltaTime);
+            if (zoneActivationTimer == 0) EnableMouseHovers();
         }
     }
 
     public override void StartPhase()
     {
         base.StartPhase();
-        AddMouseHovers();
+        EnableMouseHovers();
     }
 
     public override void EndPhase()
     {
         base.EndPhase();
-        foreach (var zone in Zones)
-        {
-            EnableComponent(zone, false);
-        }
-        zoneActivateInRound = false;
+        zoneActivationTimer = zoneActivationDelay;
+        DisableMouseHovers();
     }
 
     public override void LeftClick()
     {
-        if (zoneActivateInRound) return;
+        if (zoneActivationTimer > 0) return;
         RaycastHit hitInfo;
         Ray r = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -45,49 +47,41 @@ public class PhraseZoneDamage : PhaseBase
         var zone = hitInfo.collider.gameObject;
         if (Zones.Contains(zone))
         {
-            EnableComponent(zone, true);
-            DestroyMouseHovers();
-            zoneActivateInRound = true;
+            DisableMouseHovers();
+            if (EnableComponent(zone, true))
+            {
+                zoneActivationTimer = zoneActivationDelay;
+            }
         }
     }
 
-    void EnableComponent(GameObject zone, bool enabled)
+    bool EnableComponent(GameObject zone, bool enabled)
     {
         if (zone.GetComponent<ExplosionPlane>())
         {
             var explosionPlane = zone.GetComponent<ExplosionPlane>();
+            if (enabled && explosionPlane.enabled) return false;
             explosionPlane.enabled = enabled;
-            explosionPlane.enableBoom = enabled;    
+            explosionPlane.enableBoom = enabled;
         }
-        else if (zone.GetComponent<CooldownPlane>())
-        {
-            var cooldownPlane = zone.GetComponent<CooldownPlane>();
-            cooldownPlane.enabled = enabled;
-            if (enabled)
-            {
-                cooldownPlane.StartDamagingHeroes();
-            }
-            else
-            {
-                cooldownPlane.CancelInvoke();
-            }
-        }
+        return true;
     }
 
-    private void AddMouseHovers()
+    private void EnableMouseHovers()
     {
         foreach (var zone in Zones)
         {
-            zone.AddComponent<MouseHover>();
+            if (zone.GetComponent<ExplosionPlane>().enabled) continue;
+            zone.GetComponent<MouseHover>().enabled = true;
         }
     }
 
-    private void DestroyMouseHovers()
+    private void DisableMouseHovers()
     {
         foreach (var zone in Zones)
         {
-            zone.GetComponent<MouseHover>().ReturnToStartColor();
-            Destroy(zone.GetComponent<MouseHover>());
+            zone.GetComponent<MouseHover>().Deactivate();
+            zone.GetComponent<MouseHover>().enabled = false;
         }
     }
 }
