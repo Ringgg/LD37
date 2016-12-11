@@ -43,14 +43,14 @@ public class EffectSpawner : MonoBehaviour
         Instantiate(instance.explosionParticle, position, Quaternion.identity);
     }
 
-    public static void SpawnArrow(Vector3 position)
+    public static GameObject SpawnArrow(Vector3 position)
     {
-        Instantiate(instance.arrow, position, Quaternion.identity);
+        return Instantiate(instance.arrow, position, Quaternion.identity) as GameObject;
     }
 
-    public static void SpawnMagicMissile(Vector3 position)
+    public static GameObject SpawnMagicMissile(Vector3 position)
     {
-        Instantiate(instance.magic, position, Quaternion.identity);
+        return Instantiate(instance.magic, position, Quaternion.identity) as GameObject;
     }
 
     public static void SpawnHealthEffect(Vector3 position, Hero target)

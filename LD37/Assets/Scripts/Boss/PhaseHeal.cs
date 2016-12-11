@@ -5,13 +5,14 @@ public class PhaseHeal : PhaseBase
 {
     private Hero target;
     public float healObjectsAmount = 3;
+    public float spawnDelay = 4f;
     public int HPBoost = 100000;
     public float slamRange = 6.0f;
     public float slamKnockback = 10.0f;
     public float slamCooldown = 5.0f;
     float slamCdTimer;
-
-    private List<GameObject> healObjects = new List<GameObject>();
+    [HideInInspector]
+    public List<GameObject> healObjects = new List<GameObject>();
 
     void Awake()
     {
@@ -45,13 +46,14 @@ public class PhaseHeal : PhaseBase
     public override void StartPhase()
     {
         base.StartPhase();
-        SpawnHealObjects();
+        InvokeRepeating("SpawnHealObjects", 0, spawnDelay);
     }
 
-   
+
     public override void EndPhase()
     {
         base.EndPhase();
+        CancelInvoke();
         DestroyHealObjects();
     }
 
@@ -114,19 +116,17 @@ public class PhaseHeal : PhaseBase
 
     private void SpawnHealObjects()
     {
-        for (int i = 0; i < healObjectsAmount; i++)
-        {
-            Vector3 pos = new Vector3(Random.Range(-11f,11f), 0.5f, Random.Range(-11f, 11f));
-            healObjects.Add(EffectSpawner.SpawnHealObject(pos));
-        }
+        if (healObjects.Count >= healObjectsAmount) return;
+        Vector3 pos = new Vector3(Random.Range(-11f, 11f), 0.5f, Random.Range(-11f, 11f));
+        healObjects.Add(EffectSpawner.SpawnHealObject(pos));
     }
 
     private void DestroyHealObjects()
     {
         foreach (var healObject in healObjects)
         {
-           if (healObject == null) continue;
-           Destroy(healObject);
+            if (healObject == null) continue;
+            Destroy(healObject);
         }
     }
 
@@ -134,7 +134,7 @@ public class PhaseHeal : PhaseBase
     {
         foreach (var healObject in healObjects)
         {
-            if(healObject == null) continue;
+            if (healObject == null) continue;
             if (Vector3.Distance(transform.position, healObject.transform.position) < 2f)
             {
                 controller.hp += HPBoost;

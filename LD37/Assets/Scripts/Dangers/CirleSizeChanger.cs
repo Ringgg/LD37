@@ -13,7 +13,7 @@ public class CirleSizeChanger : MonoBehaviour
 
     void Update()
     {
-        scale = Mathf.Clamp(scale + 10 * Time.deltaTime / (scale*scale + 1), 0.5f, 50f);
+        scale = Mathf.Clamp(scale + 10 * Time.deltaTime / (scale*scale + 1), 0.5f, 60f);
         transform.localScale = new Vector3(scale, transform.localScale.y, scale);
 
     }
