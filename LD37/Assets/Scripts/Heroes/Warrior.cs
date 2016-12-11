@@ -35,6 +35,8 @@ public class Warrior : Hero
 
             if (isInDanger)
                 return;
+            else if (hp < 0.25f * startHP && distance < 8)
+                movement.GoTo(Boss.instance.transform.position + dir * 8.5f);
             else if (distance > maxDist)
                 movement.GoTo(Boss.instance.transform.position + dir * (maxDist - 0.5f));
             else if (distance < minDist)
