@@ -21,7 +21,7 @@ public class Arrow : MonoBehaviour
 
     void Update()
     {
-        if (Boss.instance == null || target == null)
+        if (Boss.instance == null || (target == null))
         {
             Destroy(gameObject);
             return;
@@ -54,13 +54,19 @@ public class Arrow : MonoBehaviour
 
     private void AttackHealObject()
     {
-        if (target == null || target.GetComponent<HealHPController>()== null) return;
+        if (target == null || target.GetComponent<HealHPController>() == null) return;
         target.GetComponent<HealHPController>().TakeDamage(damage);
     }
 
     public void SetTarget(GameObject closestHealObject, bool healPhaseActive)
     {
-        if (closestHealObject == null)
+        if (closestHealObject == null && healPhaseActive)
+        {
+            target = null;
+            targetPos = null;
+            healMode = false;
+        }
+        else if (!healPhaseActive)
         {
             target = Boss.instance.gameObject;
             targetPos = Boss.instance.gameObject.transform;
@@ -71,6 +77,6 @@ public class Arrow : MonoBehaviour
             target = closestHealObject;
             targetPos = closestHealObject.transform;
         }
-        healMode = healPhaseActive;
+healMode = healPhaseActive;
     }
 }
