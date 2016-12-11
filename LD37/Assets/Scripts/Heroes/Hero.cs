@@ -43,7 +43,7 @@ public class Hero : MonoBehaviour
 
     public void TakeDamage(float ammount)
     {
-        hp = Mathf.Max(0, hp - ammount);
+        hp = Mathf.Clamp(hp - ammount, 0, startHP);
         highlightColorChanger.ChangeHighlightColor(hp,startHP);
     }
     
@@ -60,11 +60,12 @@ public class Hero : MonoBehaviour
 
     private void CheckIfAlive()
     {
-        if (hp <= 0) Die();
+        if (hp <= 0 || transform.position.y < -100) Die();
     }
 
     public void Die()
     {
+        heroes.Remove(this);
         Destroy(gameObject);
     }
 

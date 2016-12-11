@@ -9,6 +9,9 @@ public class EffectSpawner : MonoBehaviour
 
     public GameObject explosionParticle;
 
+    public GameObject healEffect;
+    public GameObject healParticle;
+
     public GameObject arrow;
 
     public static void SpawnDotCircle(Vector3 position)
@@ -33,7 +36,12 @@ public class EffectSpawner : MonoBehaviour
 
     public static void SpawnHealthEffect(Vector3 position, Hero target)
     {
+        (Instantiate(instance.healEffect, position, Quaternion.identity) as GameObject).GetComponent<HealthRay>().Init(target);
+    }
 
+    public static void SpawnHealthParticle(Vector3 position)
+    {
+        Instantiate(instance.healParticle, position, Quaternion.identity);
     }
 
     void Awake()
