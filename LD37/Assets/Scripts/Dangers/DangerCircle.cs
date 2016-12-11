@@ -3,7 +3,12 @@ using System.Collections.Generic;
 
 public class DangerCircle : AreaDanger
 {
-    public float radius = 3;
+    private float radius;
+
+    private void Update()
+    {
+        radius = transform.GetComponent<Renderer>().bounds.extents.magnitude;
+    }
 
     public override bool IsInDanger(Hero hero)
     {

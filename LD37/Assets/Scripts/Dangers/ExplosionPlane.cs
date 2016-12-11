@@ -6,8 +6,8 @@ public class ExplosionPlane : AreaDanger
     public ExplosionPlane middlePlane;
     public ExplosionPlane rightPlane;
 
-    private Vector3 leftEdge = new Vector3(-12,0,0);
-    private Vector3 rightEdge = new Vector3(12,0,0);
+    private Vector3 leftEdge = new Vector3(-12, 0, 0);
+    private Vector3 rightEdge = new Vector3(12, 0, 0);
     private float currentTimer;
     public bool enableBoom;
     public float explosionTimer = 5.0f;
@@ -50,7 +50,7 @@ public class ExplosionPlane : AreaDanger
         }
         else
         {
-            dest = -(Vector3.zero - hero.transform.position);
+            dest = rightEdge - hero.transform.position;
         }
         dest.y = hero.transform.position.y;
         return hero.transform.position + dest.normalized;
