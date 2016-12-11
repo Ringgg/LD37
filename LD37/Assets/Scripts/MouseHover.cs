@@ -3,7 +3,6 @@ using System.Collections;
 
 public class MouseHover : MonoBehaviour
 {
-
     private Color startcolor;
     private readonly Color hovercolor = Color.black;
     private Renderer renderer;
