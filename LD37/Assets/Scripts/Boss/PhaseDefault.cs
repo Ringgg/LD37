@@ -16,8 +16,10 @@ public class PhaseDefault : PhaseBase
 
     public bool nextHitStrong;
 
-    float hitCdTimer;
-    float slamCdTimer;
+    [HideInInspector]
+    public float hitCdTimer;
+    [HideInInspector]
+    public float slamCdTimer;
 
     void Awake()
     {
@@ -28,10 +30,10 @@ public class PhaseDefault : PhaseBase
     protected override void Update()
     {
         base.Update();
+        hitCdTimer = Mathf.MoveTowards(hitCdTimer, 0, Time.deltaTime);
+        slamCdTimer = Mathf.MoveTowards(slamCdTimer, 0, Time.deltaTime);
         if (active)
         {
-            hitCdTimer = Mathf.MoveTowards(hitCdTimer, 0, Time.deltaTime);
-            slamCdTimer = Mathf.MoveTowards(slamCdTimer, 0, Time.deltaTime);
 
             if (target != null)
             {

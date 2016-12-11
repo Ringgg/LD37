@@ -4,7 +4,8 @@ using UnityEngine;
 public class PhaseGas : PhaseBase
 {
     Hero target;
-    float hitCdTimer;
+    [HideInInspector]
+    public float hitCdTimer;
     public float gasSpawnDelay = 3f;
     public float baseKnockback = 2.0f;
     public float baseDamage = 10.0f;
@@ -13,7 +14,8 @@ public class PhaseGas : PhaseBase
     public float slamRange = 6.0f;
     public float slamKnockback = 10.0f;
     public float slamCooldown = 5.0f;
-    float slamCdTimer;
+    [HideInInspector]
+    public float slamCdTimer;
 
     private List<GameObject> gasCircles = new List<GameObject>();
 
@@ -25,14 +27,14 @@ public class PhaseGas : PhaseBase
     void Update()
     {
         base.Update();
+        hitCdTimer = Mathf.MoveTowards(hitCdTimer, 0, Time.deltaTime);
+        slamCdTimer = Mathf.MoveTowards(slamCdTimer, 0, Time.deltaTime);
         if (active)
         {
             if (durationTimer == 0)
             {
                 EventManager.TriggerEvent(EventType.EndGasPhase);
             }
-            hitCdTimer = Mathf.MoveTowards(hitCdTimer, 0, Time.deltaTime);
-            slamCdTimer = Mathf.MoveTowards(slamCdTimer, 0, Time.deltaTime);
             if (target != null)
             {
                 Chase();
