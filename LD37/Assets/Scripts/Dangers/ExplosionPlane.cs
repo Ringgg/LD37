@@ -2,6 +2,7 @@
 
 public class ExplosionPlane : AreaDanger
 {
+    public GameObject highlight;
     public ExplosionPlane leftPlane;
     public ExplosionPlane middlePlane;
     public ExplosionPlane rightPlane;
@@ -14,9 +15,19 @@ public class ExplosionPlane : AreaDanger
     void Start()
     {
         currentTimer = explosionTimer;
-    }    void Update()
+    }    void Update()
     {
-        if (!enableBoom) return;
+        if (!enableBoom)
+        {
+            CancelInvoke();
+            return;
+        }
+        else
+        {
+            if (!IsInvoking())
+                InvokeRepeating("Spawn", 0, 0.3f);
+        }
+
         currentTimer = Mathf.MoveTowards(currentTimer, 0, Time.deltaTime);
         if (currentTimer == 0)
         {
@@ -54,5 +65,20 @@ public class ExplosionPlane : AreaDanger
         }
         dest.y = hero.transform.position.y;
         return hero.transform.position + dest.normalized;
+    }
+
+    void Spawn()
+    {
+        Instantiate(highlight, transform.position, transform.rotation);
+    }
+
+    void StartSpawning()
+    {
+        InvokeRepeating("Spawn", 0, 1.0f);
+    }
+
+    void EndSpawning()
+    {
+        CancelInvoke();
     }
 }
