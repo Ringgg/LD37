@@ -7,7 +7,7 @@ public class Hero : MonoBehaviour
     public static List<Hero> heroes = new List<Hero>();
     public static List<Danger> dangers = new List<Danger>();
     public float hp = 100;
-    private float startHP;
+    public float startHP;
     protected Movement movement;
     protected HighlightColorChanger highlightColorChanger;
     public bool isInDanger;

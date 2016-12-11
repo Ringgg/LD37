@@ -4,12 +4,13 @@ using System.Collections;
 public class Healer : Hero
 {
     float minDistBoss = 5;
-    float maxDistBoss = 10;
+    float maxDistBoss = 20;
 
-    float minDistHealed = 3;
+    // todo podpiac te 2 zmienne
+    float minDistHealed = 2;
     float maxDistHealed = 5;
 
-    public float damage = 10;
+    public float healAmmount = 5;
     public float shotDelay = 0.5f;
 
     float shotTimer;
@@ -43,13 +44,39 @@ public class Healer : Hero
             movement.GoTo(Boss.instance.transform.position + dir * (minDistBoss + 0.5f));
         else if (movement.walking)
             return;
-        else if (shotTimer == 0.0f)
-            Attack();
+        else if (healTarget == null)
+            LookForTarget();
+        else
+            Heal();
     }
 
-    void Attack()
+    void LookForTarget()
     {
-        EffectSpawner.SpawnArrow(transform.position);
-        shotTimer = shotDelay * Random.Range(0.75f, 1.25f);
+        int id;
+        for (int i = 0; i < 12; ++i)
+        {
+            id = Random.Range(0, heroes.Count);
+            if (heroes[i].hp != heroes[i].startHP)
+            {
+                healTarget = heroes[i];
+                return;
+            }
+        }
+    }
+
+    void Heal()
+    {
+        if (healTarget.hp == healTarget.startHP)
+        {
+            healTarget = null;
+            return;
+        }
+
+        if (shotTimer > 0)
+            return;
+
+        EffectSpawner.SpawnHealthEffect(transform.position, healTarget);
+        healTarget.hp = Mathf.MoveTowards(healTarget.hp, healTarget.startHP, healAmmount);
+        shotTimer = shotDelay;
     }
 }

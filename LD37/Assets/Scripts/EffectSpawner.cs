@@ -31,6 +31,11 @@ public class EffectSpawner : MonoBehaviour
         Instantiate(instance.arrow, position, Quaternion.identity);
     }
 
+    public static void SpawnHealthEffect(Vector3 position, Hero target)
+    {
+
+    }
+
     void Awake()
     {
         instance = this;
