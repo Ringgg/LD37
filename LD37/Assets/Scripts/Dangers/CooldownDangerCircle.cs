@@ -7,7 +7,12 @@ public class CooldownDangerCircle : DangerCircle
 
     void Awake()
     {
-        InvokeRepeating("GiveDamageInRadius", 0, delay);
+        InvokeRepeating("GiveHeroesDamage", 0, delay);
+    }
+
+    void OnDestroy()
+    {
+        
     }
 }
 
