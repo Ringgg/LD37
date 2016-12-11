@@ -7,7 +7,7 @@ public class Archer : Hero
     float maxDist = 10;
     
     public float shotDelay = 0.5f;
-
+    public bool isMage;
     float shotTimer;
 
     // helpers
@@ -47,7 +47,11 @@ public class Archer : Hero
 
     void Attack()
     {
-        EffectSpawner.SpawnArrow(transform.position);
+        if (!isMage)
+            EffectSpawner.SpawnArrow(transform.position);
+        else
+            EffectSpawner.SpawnMagicMissile(transform.position);
+
         shotTimer = shotDelay * Random.Range(0.75f, 1.25f);
     }
 }

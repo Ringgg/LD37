@@ -108,6 +108,8 @@ public class PhaseDefault : PhaseBase
             target.GetComponent<Rigidbody>().AddForce(dir * (slamKnockback), ForceMode.Impulse);
         }
 
+        EffectSpawner.SpawnSlamEffect(transform.position, transform.rotation);
+
         target = null;
         slamCdTimer = slamCd;
     }

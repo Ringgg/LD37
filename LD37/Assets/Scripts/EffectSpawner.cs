@@ -15,6 +15,8 @@ public class EffectSpawner : MonoBehaviour
     public GameObject healParticle;
 
     public GameObject arrow;
+    public GameObject magic;
+    public GameObject slamEffect;
 
     public static void SpawnDotCircle(Vector3 position)
     {
@@ -46,6 +48,11 @@ public class EffectSpawner : MonoBehaviour
         Instantiate(instance.arrow, position, Quaternion.identity);
     }
 
+    public static void SpawnMagicMissile(Vector3 position)
+    {
+        Instantiate(instance.magic, position, Quaternion.identity);
+    }
+
     public static void SpawnHealthEffect(Vector3 position, Hero target)
     {
         (Instantiate(instance.healEffect, position, Quaternion.identity) as GameObject).GetComponent<HealthRay>().Init(target);
@@ -54,6 +61,11 @@ public class EffectSpawner : MonoBehaviour
     public static void SpawnHealthParticle(Vector3 position)
     {
         Instantiate(instance.healParticle, position, Quaternion.identity);
+    }
+    
+    public static void SpawnSlamEffect(Vector3 position, Quaternion rotation)
+    {
+        Instantiate(instance.slamEffect, position, rotation);
     }
 
     void Awake()
