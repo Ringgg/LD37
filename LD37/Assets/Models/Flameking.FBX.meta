@@ -1,0 +1,159 @@
+fileFormatVersion: 2
+guid: 8610d892341703040a93d00f5d14c6de
+timeCreated: 1481444863
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Cylinder002
+    100002: Cylinder003
+    100004: //RootNode
+    100006: Marama
+    100008: MaramaHead
+    100010: MaramaLAnkle
+    100012: MaramaLCalf
+    100014: MaramaLCollarbone
+    100016: MaramaLFingers1
+    100018: MaramaLFingers2
+    100020: MaramaLForeArm2
+    100022: MaramaLForeArm2 1
+    100024: MaramaLIKTarget
+    100026: MaramaLPalm
+    100028: MaramaLPlatform
+    100030: MaramaLThigh
+    100032: MaramaLThumb1
+    100034: MaramaLThumb2
+    100036: MaramaLToe
+    100038: MaramaLUpperArm
+    100040: MaramaNeck
+    100042: MaramaPelvis
+    100044: MaramaRAnkle
+    100046: MaramaRCalf
+    100048: MaramaRCollarbone
+    100050: MaramaRFingers1
+    100052: MaramaRFingers2
+    100054: MaramaRForeArm2
+    100056: MaramaRForeArm2 1
+    100058: MaramaRibcage
+    100060: MaramaRIKTarget
+    100062: MaramaRPalm
+    100064: MaramaRPlatform
+    100066: MaramaRThigh
+    100068: MaramaRThumb1
+    100070: MaramaRThumb2
+    100072: MaramaRToe
+    100074: MaramaRUpperArm
+    100076: MaramaSpine1
+    100078: MaramaSpine2
+    100080: MaramaSpine3
+    400000: Cylinder002
+    400002: Cylinder003
+    400004: //RootNode
+    400006: Marama
+    400008: MaramaHead
+    400010: MaramaLAnkle
+    400012: MaramaLCalf
+    400014: MaramaLCollarbone
+    400016: MaramaLFingers1
+    400018: MaramaLFingers2
+    400020: MaramaLForeArm2
+    400022: MaramaLForeArm2 1
+    400024: MaramaLIKTarget
+    400026: MaramaLPalm
+    400028: MaramaLPlatform
+    400030: MaramaLThigh
+    400032: MaramaLThumb1
+    400034: MaramaLThumb2
+    400036: MaramaLToe
+    400038: MaramaLUpperArm
+    400040: MaramaNeck
+    400042: MaramaPelvis
+    400044: MaramaRAnkle
+    400046: MaramaRCalf
+    400048: MaramaRCollarbone
+    400050: MaramaRFingers1
+    400052: MaramaRFingers2
+    400054: MaramaRForeArm2
+    400056: MaramaRForeArm2 1
+    400058: MaramaRibcage
+    400060: MaramaRIKTarget
+    400062: MaramaRPalm
+    400064: MaramaRPlatform
+    400066: MaramaRThigh
+    400068: MaramaRThumb1
+    400070: MaramaRThumb2
+    400072: MaramaRToe
+    400074: MaramaRUpperArm
+    400076: MaramaSpine1
+    400078: MaramaSpine2
+    400080: MaramaSpine3
+    4300000: Cylinder002
+    4300002: Cylinder003
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: Cylinder002
+    13700002: Cylinder003
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
