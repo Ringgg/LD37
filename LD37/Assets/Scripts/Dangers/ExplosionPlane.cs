@@ -2,11 +2,32 @@
 
 public class ExplosionPlane : AreaDanger
 {
-    public CooldownPlane secondPlane;
-    public void GiveDamage()
+    public ExplosionPlane leftPlane;
+    public ExplosionPlane middlePlane;
+    public ExplosionPlane rightPlane;
+
+    private Vector3 leftEdge = new Vector3(-12,0,0);
+    private Vector3 rightEdge = new Vector3(12,0,0);
+    private float currentTimer;
+    public bool enableBoom;
+    public float explosionTimer = 5.0f;
+    void Start()
     {
-        GiveHeroesDamage();
-    }
+        currentTimer = explosionTimer;
+    }    void Update()
+    {
+        if (!enableBoom) return;
+        currentTimer = Mathf.MoveTowards(currentTimer, 0, Time.deltaTime);
+        if (currentTimer == 0)
+        {
+            enableBoom = false;
+            GiveHeroesDamage();
+            currentTimer = explosionTimer;
+            foreach (var particle in GetComponentsInChildren<ParticleSystem>())
+            {
+                particle.Play();
+            }
+        }    }
 
     public override bool IsInDanger(Hero hero)
     {
@@ -15,14 +36,21 @@ public class ExplosionPlane : AreaDanger
 
     public override Vector3 GetEscapePosition(Hero hero)
     {
-        Vector3 dest;
-        if (secondPlane.isActiveAndEnabled)
+        Vector3 dest;        if (leftPlane.enableBoom && rightPlane.enableBoom)
         {
-            dest = -(Vector3.zero - hero.transform.position);
+            dest = (Vector3.zero - hero.transform.position);
+        }
+        else if ((leftPlane.enableBoom && middlePlane.enableBoom) || leftPlane.enableBoom)
+        {
+            dest = rightEdge - hero.transform.position;
+        }
+        else if ((rightPlane.enableBoom && middlePlane.enableBoom) || rightPlane.enableBoom)
+        {
+            dest = leftEdge - hero.transform.position;
         }
         else
         {
-            dest = -(transform.position - hero.transform.position);
+            dest = -(Vector3.zero - hero.transform.position);
         }
         dest.y = hero.transform.position.y;
         return hero.transform.position + dest.normalized;

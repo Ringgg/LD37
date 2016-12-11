@@ -63,7 +63,7 @@ public class PhaseExplosionSpam : PhaseBase
                 return;
 
             point = hitInfo.point + Random.insideUnitSphere * explosionScatterRadius;
-            point.y = 0.03f;
+            point.y = 0;
 
             EffectSpawner.SpawnExplosionCircle(point);
             spawnDelayTimer = explosionSpawnDelay;

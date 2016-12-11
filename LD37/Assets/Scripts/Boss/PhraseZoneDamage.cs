@@ -51,11 +51,15 @@ public class PhraseZoneDamage : PhaseBase
         }
     }
 
-
-
     void EnableComponent(GameObject zone, bool enabled)
     {
-        if (zone.GetComponent<CooldownPlane>())
+        if (zone.GetComponent<ExplosionPlane>())
+        {
+            var explosionPlane = zone.GetComponent<ExplosionPlane>();
+            explosionPlane.enabled = enabled;
+            explosionPlane.enableBoom = enabled;    
+        }
+        else if (zone.GetComponent<CooldownPlane>())
         {
             var cooldownPlane = zone.GetComponent<CooldownPlane>();
             cooldownPlane.enabled = enabled;
@@ -67,28 +71,6 @@ public class PhraseZoneDamage : PhaseBase
             {
                 cooldownPlane.CancelInvoke();
             }
-        }
-        else if (zone.GetComponent<ExplosionPlane>())
-        {
-            var explosionPlane = zone.GetComponent<ExplosionPlane>();
-            explosionPlane.enabled = enabled;
-            if (!enabled) return;
-            explosionPlane.GiveDamage();
-            foreach (var particle in explosionPlane.GetComponentsInChildren<ParticleSystem>())
-            {
-                particle.Play();
-            }
-
-        }
-        else if (zone.GetComponent<ExternalDanger>())
-        {
-            //foreach (var externalZone in Zones)
-            //{
-            //    if (!externalZone.GetComponent<ExternalDanger>()) continue;
-                var externalDanger = zone.GetComponent<ExternalDanger>();
-                externalDanger.enabled = enabled;
-            //}
-
         }
     }
 
