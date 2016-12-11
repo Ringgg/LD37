@@ -9,7 +9,6 @@ public class Hero : MonoBehaviour
     public float hp = 100;
     public float startHP;
     protected Movement movement;
-    protected HighlightColorChanger highlightColorChanger;
     public bool isInDanger;
 
 
@@ -17,7 +16,6 @@ public class Hero : MonoBehaviour
     {
         startHP = hp;
         movement = GetComponent<Movement>();
-        highlightColorChanger = GetComponentInChildren<HighlightColorChanger>();
         heroes.Add(this);
     }
 
@@ -44,7 +42,6 @@ public class Hero : MonoBehaviour
     public void TakeDamage(float ammount)
     {
         hp = Mathf.Clamp(hp - ammount, 0, startHP);
-        highlightColorChanger.ChangeHighlightColor(hp,startHP);
     }
     
     public static void AddDanger(Danger danger)
