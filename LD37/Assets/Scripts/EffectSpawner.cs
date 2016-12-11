@@ -7,6 +7,7 @@ public class EffectSpawner : MonoBehaviour
     public GameObject dotCircle;
     public GameObject explosionCircle;
     public GameObject gasCircle;
+    public GameObject healObject;
 
     public GameObject explosionParticle;
 
@@ -23,6 +24,11 @@ public class EffectSpawner : MonoBehaviour
     public static GameObject SpawnGasCircle(Vector3 position)
     {
         return Instantiate(instance.gasCircle, position, Quaternion.identity) as GameObject;
+    }
+
+    public static GameObject SpawnHealObject(Vector3 position)
+    {
+        return Instantiate(instance.healObject, position, Quaternion.identity) as GameObject;
     }
 
     public static void SpawnExplosionCircle(Vector3 position)

@@ -28,6 +28,7 @@ public class Boss : MonoBehaviour
         EventManager.StartListening(EventType.EndAoePhase, GoDefault);
         EventManager.StartListening(EventType.EndZonePhase, GoDefault);
         EventManager.StartListening(EventType.EndGasPhase, GoDefault);
+        EventManager.StartListening(EventType.EndHealPhase, GoDefault);
         GoDefault();
     }
 
@@ -38,7 +39,7 @@ public class Boss : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Q) && IsInDefault() && aoePhase.CanSwitch())
                 GoExplosionSpam();
             if (Input.GetKeyDown(KeyCode.W) && IsInDefault() && healPhase.CanSwitch())
-                GoToPhase(healPhase);
+                GoHeal();
             if (Input.GetKeyDown(KeyCode.E) && IsInDefault() && zonePhase.CanSwitch())
                 GoZone();
             if (Input.GetKeyDown(KeyCode.R) && IsInDefault() && gasPhase.CanSwitch())
