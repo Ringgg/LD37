@@ -3,6 +3,7 @@ using System;
 
 public enum EventType
 {
+    BossDied,
     BossAtHalfHp,
     EndAoePhase,
     EndHealPhase,

@@ -11,7 +11,10 @@ public class Boss : MonoBehaviour
     public PhaseBase zonePhase;
     public PhaseBase aoePhase;
     public Movement movement;
-    
+
+    public int maxHp = 1000000;
+    public int hp;
+
     public void Awake()
     {
         instance = this;
@@ -20,6 +23,7 @@ public class Boss : MonoBehaviour
 
     void Start()
     {
+        hp = maxHp;
         EventManager.StartListening(EventType.EndAoePhase, GoDefault);
         EventManager.StartListening(EventType.EndZonePhase, GoDefault);
         GoDefault();
@@ -53,13 +57,26 @@ public class Boss : MonoBehaviour
         curPhase.StartPhase();
     }
 
+    bool IsInDefault()
+    {
+        return curPhase == defaultPhase;
+    }
+
     public void WalkTo(Vector3 position)
     {
         movement.GoTo(position);
     }
 
-    bool IsInDefault()
+    public void TakeDamage(int ammount)
     {
-        return curPhase == defaultPhase;
+        hp = Mathf.Clamp(hp - ammount, 0, maxHp);
+        if (hp == 0)
+            Die();
+    }
+
+    public void Die()
+    {
+        EventManager.TriggerEvent(EventType.BossDied, this);
+        Destroy(gameObject);        
     }
 }

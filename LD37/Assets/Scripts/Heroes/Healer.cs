@@ -31,17 +31,26 @@ public class Healer : Hero
     {
         base.Update();
 
-        float distance = Vector3.Distance(transform.position, Boss.instance.transform.position);
-        dir = (transform.position - Boss.instance.transform.position).normalized;
+        if (Boss.instance != null)
+        {
+            float distance = Vector3.Distance(transform.position, Boss.instance.transform.position);
+            dir = (transform.position - Boss.instance.transform.position).normalized;
 
-        shotTimer = Mathf.MoveTowards(shotTimer, 0.0f, Time.deltaTime);
+            shotTimer = Mathf.MoveTowards(shotTimer, 0.0f, Time.deltaTime);
 
-        if (isInDanger)
-            return;
-        else if (distance > maxDistBoss)
-            movement.GoTo(Boss.instance.transform.position + dir * (maxDistBoss - 0.5f));
-        else if (distance < minDistBoss)
-            movement.GoTo(Boss.instance.transform.position + dir * (minDistBoss + 0.5f));
+            if (isInDanger)
+                return;
+            else if (distance > maxDistBoss)
+                movement.GoTo(Boss.instance.transform.position + dir * (maxDistBoss - 0.5f));
+            else if (distance < minDistBoss)
+                movement.GoTo(Boss.instance.transform.position + dir * (minDistBoss + 0.5f));
+            else if (movement.walking || movement.thrown)
+                return;
+            else if (healTarget == null)
+                LookForTarget();
+            else
+                Heal();
+        }
         else if (movement.walking || movement.thrown)
             return;
         else if (healTarget == null)

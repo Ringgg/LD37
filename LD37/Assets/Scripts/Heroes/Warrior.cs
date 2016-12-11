@@ -6,7 +6,7 @@ public class Warrior : Hero
     float minDist = 2f;
     float maxDist = 2.5f;
 
-    public float damage = 10;
+    public int damage = 10;
     public float strikeDelay = 1.0f;
 
     float strikeTimer;
@@ -26,27 +26,31 @@ public class Warrior : Hero
     {
         base.Update();
 
-        float distance = Vector3.Distance(transform.position, Boss.instance.transform.position);
-        dir = (transform.position - Boss.instance.transform.position).normalized;
+        if (Boss.instance !=null)
+        {
+            float distance = Vector3.Distance(transform.position, Boss.instance.transform.position);
+            dir = (transform.position - Boss.instance.transform.position).normalized;
 
-        strikeTimer = Mathf.MoveTowards(strikeTimer, 0.0f, Time.deltaTime);
+            strikeTimer = Mathf.MoveTowards(strikeTimer, 0.0f, Time.deltaTime);
 
-        if (isInDanger)
-            return;
-        else if (distance > maxDist)
-            movement.GoTo(Boss.instance.transform.position + dir * (maxDist - 0.5f));
-        else if (distance < minDist)
-            movement.GoTo(Boss.instance.transform.position + dir * (minDist + 0.5f));
-        else if (movement.walking)
-            return;
-        else if (strikeTimer == 0.0f)
-            Attack();
+            if (isInDanger)
+                return;
+            else if (distance > maxDist)
+                movement.GoTo(Boss.instance.transform.position + dir * (maxDist - 0.5f));
+            else if (distance < minDist)
+                movement.GoTo(Boss.instance.transform.position + dir * (minDist + 0.5f));
+            else if (movement.walking)
+                return;
+            else if (strikeTimer == 0.0f)
+                Attack();
+        }
     }
 
     void Attack()
     {
         strikeTimer = strikeDelay * Random.Range(0.75f, 1.25f);
 
+        Boss.instance.TakeDamage(damage);
         Vector3 dir = (Boss.instance.transform.position - transform.position).normalized * 0.5f;
         Boss.instance.GetComponent<Rigidbody>().AddForce(dir, ForceMode.VelocityChange);
     }
