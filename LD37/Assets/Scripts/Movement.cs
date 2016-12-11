@@ -73,7 +73,11 @@ public class Movement : MonoBehaviour
     void Rotate()
     {
         dir.y = 0;
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir, Vector3.up), Time.deltaTime * 5);
+        if (dir.magnitude > 0.01f)
+            transform.rotation = Quaternion.Slerp(
+                transform.rotation,
+                Quaternion.LookRotation(dir, Vector3.up),
+                Time.deltaTime * 5);
     }
 
     public void Halt()

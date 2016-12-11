@@ -7,6 +7,7 @@ public class Arrow : MonoBehaviour
 
     public float height = 3;
     public float flightTime = 0.5f;
+    public int damage = 10;
     float timer;
 
     Vector3 lastPos;
@@ -19,6 +20,12 @@ public class Arrow : MonoBehaviour
 	
 	void Update ()
     {
+        if (Boss.instance == null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         lastPos = transform.position;
         timer += Time.deltaTime;
         float progress = Mathf.Clamp(timer / flightTime, 0.0f, 1.0f);
@@ -31,7 +38,7 @@ public class Arrow : MonoBehaviour
 
         if (progress == 1.0f)
         {
-            //deal damage
+            Boss.instance.TakeDamage(damage);
             Destroy(gameObject);
         }
     }
