@@ -6,7 +6,8 @@ public class PhaseExplosionSpam : PhaseBase
     public float explosionSpawnDelay = 0.2f;
     public Transform holdPositionPt;
 
-    float spawnDelayTimer;
+    [HideInInspector]
+    public float spawnDelayTimer;
     bool readyToSpawn;
 
     void Awake()

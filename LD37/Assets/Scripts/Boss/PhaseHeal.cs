@@ -10,7 +10,9 @@ public class PhaseHeal : PhaseBase
     public float slamRange = 6.0f;
     public float slamKnockback = 10.0f;
     public float slamCooldown = 5.0f;
-    float slamCdTimer;
+
+    [HideInInspector]
+    public float slamCdTimer;
     [HideInInspector]
     public List<GameObject> healObjects = new List<GameObject>();
 
@@ -23,13 +25,13 @@ public class PhaseHeal : PhaseBase
     void Update()
     {
         base.Update();
+        slamCdTimer = Mathf.MoveTowards(slamCdTimer, 0, Time.deltaTime);
         if (active)
         {
             if (durationTimer == 0)
             {
                 EventManager.TriggerEvent(EventType.EndHealPhase);
             }
-            slamCdTimer = Mathf.MoveTowards(slamCdTimer, 0, Time.deltaTime);
             if (target != null)
             {
                 Chase();
@@ -78,10 +80,7 @@ public class PhaseHeal : PhaseBase
 
             if (effect < 0.0f)
                 continue;
-
-            if (Vector3.Dot(transform.forward, (target.transform.position - transform.position).normalized) < 0.5f)
-                continue;
-
+            
             target.GetThrown(1.0f);
 
             Vector3 dir = (target.transform.position - transform.position).normalized + Vector3.up;

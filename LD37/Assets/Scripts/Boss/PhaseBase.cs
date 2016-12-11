@@ -11,8 +11,8 @@ public class PhaseBase : MonoBehaviour
     public float cooldown = 60;
     public float duration = 15;
 
-    protected float cooldownTimer;
-    protected float durationTimer;
+    public float cooldownTimer;
+    public float durationTimer;
 
     protected virtual void Update()
     {

@@ -50,11 +50,11 @@ public class Boss : MonoBehaviour
         if (Input.GetMouseButtonDown(1)) curPhase.RightClick();
     }
 
-    public void GoDefault() { GoToPhase(defaultPhase); }
-    public void GoExplosionSpam() { GoToPhase(aoePhase); }
-    public void GoHeal() { GoToPhase(healPhase); }
-    public void GoZone() { GoToPhase(zonePhase); }
-    public void GoGas() { GoToPhase(gasPhase); }
+    public void GoDefault() { GoToPhase(defaultPhase); EventManager.TriggerEvent(EventType.StartDefaultPhase); }
+    public void GoExplosionSpam() { GoToPhase(aoePhase); EventManager.TriggerEvent(EventType.StartAoePhase); }
+    public void GoHeal() { GoToPhase(healPhase); EventManager.TriggerEvent(EventType.StartHealPhase); }
+    public void GoZone() { GoToPhase(zonePhase); EventManager.TriggerEvent(EventType.StartZonePhase); }
+    public void GoGas() { GoToPhase(gasPhase); EventManager.TriggerEvent(EventType.StartGasPhase); }
 
     public void GoToPhase(PhaseBase phase)
     {
