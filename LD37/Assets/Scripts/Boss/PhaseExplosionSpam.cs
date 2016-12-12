@@ -49,6 +49,7 @@ public class PhaseExplosionSpam : PhaseBase
     public override void StartPhase()
     {
         base.StartPhase();
+        PlayLaugh();
         movement.stoppingDist = 0.5f;
         readyToSpawn = false;
     }

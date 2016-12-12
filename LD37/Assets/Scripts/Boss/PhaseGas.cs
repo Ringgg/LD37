@@ -28,6 +28,11 @@ public class PhaseGas : PhaseBase
 
     private List<GameObject> gasCircles = new List<GameObject>();
 
+    void Start()
+    {
+        controller = Boss.instance;
+    }
+
     protected override void Awake()
     {
         base.Awake();
@@ -62,8 +67,8 @@ public class PhaseGas : PhaseBase
     public override void StartPhase()
     {
         base.StartPhase();
-        PlayLaugh();
         InvokeRepeating("SpawnGasCircle", 0, gasSpawnDelay);
+        PlayLaugh();
     }
 
     public override void EndPhase()

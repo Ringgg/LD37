@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class PhraseZoneDamage : PhaseBase
@@ -11,10 +8,14 @@ public class PhraseZoneDamage : PhaseBase
 
     private float zoneActivationTimer;
 
+    void Start()
+    {
+        controller = Boss.instance;
+    }
+
     protected override void Awake()
     {
         base.Awake();
-        controller = Boss.instance;
     }
 
     protected override void Update()
