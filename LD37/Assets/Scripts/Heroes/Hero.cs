@@ -8,7 +8,7 @@ public class Hero : MonoBehaviour
     public static List<Danger> dangers = new List<Danger>();
     public float hp = 100;
     public float startHP;
-    protected Movement movement;
+    public Movement movement;
     public bool isInDanger;
 
 
