@@ -12,7 +12,7 @@ public class ExplosionPlane : AreaDanger
     private float currentTimer;
     public bool enableBoom;
     public float explosionTimer = 5.0f;
-    void Start()
+    void Start()
     {
         currentTimer = explosionTimer;
     }    void Update()
@@ -38,7 +38,8 @@ public class ExplosionPlane : AreaDanger
             {
                 particle.Play();
             }
-        }    }
+            enabled = false;
+        }    }
 
     public override bool IsInDanger(Hero hero)
     {

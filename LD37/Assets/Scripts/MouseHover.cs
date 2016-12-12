@@ -1,28 +1,51 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class MouseHover : MonoBehaviour
 {
-    private Color startcolor;
-    private readonly Color hovercolor = Color.black;
-    private Renderer renderer;
+    public GameObject trasformablePlane;
 
-    void Start()
+    private Vector3 startPos;
+    private Renderer renderer;
+    private bool enableHovering;
+
+    float freq = 0.75f;
+    float freqTimer;
+    Vector3 startScale;
+
+    void Awake()
     {
-        renderer = GetComponent<Renderer>();
-        startcolor = renderer.material.color;
+        startPos = trasformablePlane.transform.position;
+        startScale = trasformablePlane.transform.localScale;
+        renderer = trasformablePlane.GetComponent<Renderer>();
+        renderer.enabled = false;
     }
+
+    void Update()
+    {
+        if (!enableHovering) return;
+        renderer.enabled = true;
+        freqTimer = (freqTimer + Time.deltaTime) % freq;
+        trasformablePlane.transform.position = trasformablePlane.transform.position + Vector3.up * 0.004123f;
+        trasformablePlane.transform.localScale = startScale * (0.25f + 0.75f * freqTimer / freq);
+    }
+
     void OnMouseEnter()
     {
-        renderer.material.color = hovercolor;
+        enableHovering = true;
     }
     void OnMouseExit()
     {
-        ReturnToStartColor();
+        Deactivate();
     }
 
-    public void ReturnToStartColor()
+    public void ReturnToStartPosition()
     {
-        renderer.material.color = startcolor;
+        trasformablePlane.transform.position = startPos;
+    }
+
+    public void Deactivate()
+    {
+        enableHovering = false;
+        renderer.enabled = false;
     }
 }
