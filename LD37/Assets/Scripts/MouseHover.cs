@@ -7,6 +7,7 @@ public class MouseHover : MonoBehaviour
     private Vector3 startPos;
     private Renderer renderer;
     private bool enableHovering;
+    public LayerMask layerMask;
 
     float freq = 0.75f;
     float freqTimer;
@@ -22,20 +23,29 @@ public class MouseHover : MonoBehaviour
 
     void Update()
     {
-        if (!enableHovering) return;
+        
+        if (IsMousePointing() == false) return;
         renderer.enabled = true;
         freqTimer = (freqTimer + Time.deltaTime) % freq;
         trasformablePlane.transform.position = trasformablePlane.transform.position + Vector3.up * 0.004123f;
         trasformablePlane.transform.localScale = startScale * (0.25f + 0.75f * freqTimer / freq);
     }
 
-    void OnMouseEnter()
+    private bool IsMousePointing()
     {
-        enableHovering = true;
-    }
-    void OnMouseExit()
-    {
-        Deactivate();
+        RaycastHit hitInfo;
+        Ray r = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (!Physics.Raycast(r, out hitInfo, 1000, layerMask))
+        {
+            renderer.enabled = false;
+            return false;
+        }
+        if (hitInfo.collider.gameObject == gameObject)
+        {
+            return true;
+        }
+        renderer.enabled = false;
+        return false;
     }
 
     public void ReturnToStartPosition()

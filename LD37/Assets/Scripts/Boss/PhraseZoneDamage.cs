@@ -5,6 +5,7 @@ public class PhraseZoneDamage : PhaseBase
 {
     public List<GameObject> Zones;
     public float zoneActivationDelay = 5f;
+    public LayerMask layerMask;
 
     private float zoneActivationTimer;
 
@@ -52,9 +53,9 @@ public class PhraseZoneDamage : PhaseBase
         RaycastHit hitInfo;
         Ray r = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (!Physics.Raycast(r, out hitInfo))
+        if (!Physics.Raycast(r, out hitInfo, 1000 ,layerMask))
             return;
-
+        
         var zone = hitInfo.collider.gameObject;
         if (Zones.Contains(zone))
         {
