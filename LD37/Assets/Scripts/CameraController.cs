@@ -8,7 +8,9 @@ public class CameraController : MonoBehaviour
     Vector3 desPos;
     Vector3 tmp;
 
-    float minDist = 5.0f;
+    Quaternion desRot;
+
+    float minDist = 7.5f;
 
     void Start()
     {
@@ -34,8 +36,13 @@ public class CameraController : MonoBehaviour
             desPos = Vector3.LerpUnclamped(bossPos, heroesPos, 1.5f) + Vector3.up * 3 * Mathf.Sqrt(tmp.magnitude);
         else
             desPos = tmp.normalized * minDist * 1.5f + bossPos + Vector3.up * 3 * Mathf.Sqrt(minDist * 1.5f);
-        transform.position = Vector3.Lerp(transform.position, desPos, 0.05f);
-        transform.LookAt(Boss.instance.transform.position - Vector3.up);
+
+        desRot = Quaternion.LookRotation(Boss.instance.transform.position - Vector3.up - transform.position);
+
+        transform.position = Vector3.Lerp(transform.position, desPos, 0.01f);
+        transform.rotation = Quaternion.Slerp(transform.rotation, desRot, 0.02f);
+
+        //transform.LookAt(Boss.instance.transform.position - Vector3.up);
     }
 
     void SpecialPhaseStart()

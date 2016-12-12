@@ -47,6 +47,7 @@ public class Arrow : MonoBehaviour
             else
             {
                 Boss.instance.TakeDamage(damage);
+                EffectSpawner.SpawnDamageEffect(damage);
                 Destroy(gameObject);
             }
         }

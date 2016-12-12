@@ -63,6 +63,7 @@ public class Warrior : Hero
         }
         else
         {
+            EffectSpawner.SpawnDamageEffect(damage);
             Boss.instance.TakeDamage(damage);
             Vector3 dir = (Boss.instance.transform.position - transform.position).normalized * 0.5f;
             Boss.instance.GetComponent<Rigidbody>().AddForce(dir, ForceMode.VelocityChange);
