@@ -62,6 +62,7 @@ public class PhaseGas : PhaseBase
     public override void StartPhase()
     {
         base.StartPhase();
+        PlayLaugh();
         InvokeRepeating("SpawnGasCircle", 0, gasSpawnDelay);
     }
 

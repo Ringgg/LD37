@@ -14,6 +14,7 @@ public class PhraseZoneDamage : PhaseBase
     protected override void Awake()
     {
         base.Awake();
+        controller = Boss.instance;
     }
 
     protected override void Update()
@@ -31,6 +32,7 @@ public class PhraseZoneDamage : PhaseBase
     public override void StartPhase()
     {
         base.StartPhase();
+        PlayLaugh();
         anim.SetBool("Channel", true);
         EnableMouseHovers();
     }

@@ -56,6 +56,9 @@ public class Warrior : Hero
 
     void Attack()
     {
+        AudioManager.instance.SetClip(audio,AudioManager.instance.warriorAttack);
+        audio.pitch = Random.Range(0.5f, 1.5f);
+        audio.Play();
         strikeTimer = strikeDelay * Random.Range(0.75f, 1.25f);
         if (healPhase.active)
         {

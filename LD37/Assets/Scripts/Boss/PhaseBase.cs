@@ -37,6 +37,7 @@ public class PhaseBase : MonoBehaviour
         active = true;
         cooldownTimer = cooldown;
         durationTimer = duration;
+       
     }
 
     public virtual void EndPhase()
@@ -46,4 +47,11 @@ public class PhaseBase : MonoBehaviour
 
     public virtual void LeftClick() { }
     public virtual void RightClick() { }
+
+    public void PlayLaugh()
+    {
+        AudioManager.instance.SetClip(controller.audio, AudioManager.instance.bossLaugh);
+        controller.audio.pitch = 1;
+        controller.audio.Play();
+    }
 }

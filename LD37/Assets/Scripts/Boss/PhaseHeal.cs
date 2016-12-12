@@ -58,6 +58,7 @@ public class PhaseHeal : PhaseBase
     public override void StartPhase()
     {
         base.StartPhase();
+        PlayLaugh();
         InvokeRepeating("SpawnHealObjects", 0, spawnDelay);
     }
 

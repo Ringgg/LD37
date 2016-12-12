@@ -83,7 +83,8 @@ public class Healer : Hero
 
         if (shotTimer > 0)
             return;
-
+        AudioManager.instance.SetClip(audio, AudioManager.instance.healSound);
+        audio.Play();
         EffectSpawner.SpawnHealthEffect(transform.position, healTarget);
         shotTimer = shotDelay;
     }

@@ -10,7 +10,7 @@ public class Hero : MonoBehaviour
     public float startHP;
     public Movement movement;
     public bool isInDanger;
-    private AudioSource audio;
+    protected AudioSource audio;
 
     private bool died;
 

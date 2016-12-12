@@ -16,6 +16,8 @@ public class Boss : MonoBehaviour
     public int maxHp = 1000000;
     public int hp;
 
+    private bool died;
+
     Animator anim;
     Rigidbody rb;
     [HideInInspector]
@@ -94,6 +96,9 @@ public class Boss : MonoBehaviour
     {
         EffectSpawner.SpawnLootRain();
         anim.SetTrigger("Die");
+        AudioManager.instance.SetClip(audio,AudioManager.instance.bossDeath);
+        audio.pitch = 1;
+        AudioManager.instance.PlaySomeAudio(audio);
         anim.transform.parent = null;
         EventManager.TriggerEvent(EventType.BossDied, this);
 
@@ -104,6 +109,6 @@ public class Boss : MonoBehaviour
             pos.y = 0.0f;
             h.movement.GoTo(pos + transform.position);
         }
-        Destroy(gameObject);        
+        Destroy(gameObject);
     }
 }
