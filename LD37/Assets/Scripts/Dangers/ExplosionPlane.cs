@@ -68,6 +68,12 @@ public class ExplosionPlane : AreaDanger
         return hero.transform.position + dest.normalized;
     }
 
+    void OnDisable()
+    {
+        CancelInvoke();
+        Hero.dangers.Remove(this);
+    }
+
     void Spawn()
     {
         Instantiate(highlight, transform.position, transform.rotation);
