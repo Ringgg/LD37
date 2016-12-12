@@ -124,6 +124,8 @@ public class PhaseDefault : PhaseBase
         }
 
         target = tmp;
+        AudioManager.instance.SetClip(Boss.instance.audio, AudioManager.instance.bossSpecial);
+        Boss.instance.audio.Play();
         EffectSpawner.SpawnSlamEffect(transform.position, transform.rotation);
         
         slamCdTimer = slamCd;
@@ -132,7 +134,9 @@ public class PhaseDefault : PhaseBase
     void Hit()
     {
         anim.SetTrigger("Attack");
-
+        AudioManager.instance.SetRandomClipFromList(Boss.instance.audio, AudioManager.instance.bossHitClips);
+        Boss.instance.audio.pitch = Random.Range(0.5f, 1.5f);
+        Boss.instance.audio.Play();
         hitCdTimer = hitCd;
         target.GetThrown(1.0f);
 

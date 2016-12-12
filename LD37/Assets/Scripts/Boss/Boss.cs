@@ -18,6 +18,8 @@ public class Boss : MonoBehaviour
 
     Animator anim;
     Rigidbody rb;
+    [HideInInspector]
+    public AudioSource audio;
     public BossTargetHighlight highlight;
 
     public void Awake()
@@ -26,6 +28,7 @@ public class Boss : MonoBehaviour
         movement = GetComponent<Movement>();
         anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody>();
+        audio = GetComponent<AudioSource>();
     }
 
     void Start()

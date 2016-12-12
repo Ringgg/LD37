@@ -12,10 +12,13 @@ public class ExplosionPlane : AreaDanger
     private float currentTimer;
     public bool enableBoom;
     public float explosionTimer = 5.0f;
+    private AudioSource audio;
+
     void Start()
     {
         currentTimer = explosionTimer;
-    }    void Update()
+        audio = GetComponent<AudioSource>();
+    }    void Update()
     {
         if (!enableBoom)
         {
@@ -33,6 +36,7 @@ public class ExplosionPlane : AreaDanger
         {
             enableBoom = false;
             GiveHeroesDamage();
+            audio.Play();
             currentTimer = explosionTimer;
             foreach (var particle in GetComponentsInChildren<ParticleSystem>())
             {

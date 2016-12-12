@@ -12,11 +12,15 @@ public class Arrow : MonoBehaviour
     public int damage = 10;
     float timer;
     Vector3 lastPos;
+    private AudioSource audio;
 
     void Awake()
     {
         startPos = transform.position;
         targetPos = Boss.instance.transform;
+        audio = GetComponent<AudioSource>();
+        audio.pitch = Random.Range(0.75f, 1.5f);
+        audio.Play();
     }
 
     void Update()
@@ -78,6 +82,6 @@ public class Arrow : MonoBehaviour
             target = closestHealObject;
             targetPos = closestHealObject.transform;
         }
-healMode = healPhaseActive;
+        healMode = healPhaseActive;
     }
 }

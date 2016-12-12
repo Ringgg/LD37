@@ -126,6 +126,8 @@ public class PhaseGas : PhaseBase
             return;
 
         anim.SetTrigger("Shout");
+        AudioManager.instance.SetClip(Boss.instance.audio, AudioManager.instance.bossSpecial);
+        Boss.instance.audio.Play();
         Hero tmp = target;
 
         for (int i = Hero.heroes.Count - 1; i >= 0; --i)

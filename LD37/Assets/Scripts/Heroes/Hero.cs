@@ -8,8 +8,11 @@ public class Hero : MonoBehaviour
     public static List<Danger> dangers = new List<Danger>();
     public float hp = 100;
     public float startHP;
-    protected Movement movement;
+    public Movement movement;
     public bool isInDanger;
+    private AudioSource audio;
+
+    private bool died;
 
 
     public virtual void Awake()
@@ -17,6 +20,7 @@ public class Hero : MonoBehaviour
         startHP = hp;
         movement = GetComponent<Movement>();
         heroes.Add(this);
+        audio = GetComponent<AudioSource>();
     }
 
     public virtual void Update()
@@ -62,10 +66,19 @@ public class Hero : MonoBehaviour
 
     public void Die()
     {
+        if (died && !audio.isPlaying)
+        {
+           Destroy(gameObject);
+           return; 
+        }
+        if(died) return;
+        AudioManager.instance.SetRandomClipFromList(audio,AudioManager.instance.dieClips);
+        Debug.Log(audio.clip);
+        audio.Play();
         heroes.Remove(this);
         if (heroes.Count == 0)
             EventManager.TriggerEvent(EventType.HeroesKilled);
-        Destroy(gameObject);
+        died = true;
     }
 
     public void GetThrown(float forTime = 1.0f)
