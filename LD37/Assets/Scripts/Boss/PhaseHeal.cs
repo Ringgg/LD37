@@ -3,7 +3,16 @@ using UnityEngine;
 
 public class PhaseHeal : PhaseBase
 {
-    private Hero target;
+    Hero _target;
+    Hero target
+    {
+        get { return _target; }
+        set
+        {
+            _target = value;
+            Boss.instance.highlight.SetTarget(value);
+        }
+    }
     public float healObjectsAmount = 3;
     public float spawnDelay = 4f;
     public int HPBoost = 100000;

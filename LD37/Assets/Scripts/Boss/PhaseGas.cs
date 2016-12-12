@@ -3,7 +3,16 @@ using UnityEngine;
 
 public class PhaseGas : PhaseBase
 {
-    Hero target;
+    Hero _target;
+    Hero target
+    {
+        get { return _target; }
+        set
+        {
+            _target = value;
+            Boss.instance.highlight.SetTarget(value);
+        }
+    }
     [HideInInspector]
     public float hitCdTimer;
     public float gasSpawnDelay = 3f;

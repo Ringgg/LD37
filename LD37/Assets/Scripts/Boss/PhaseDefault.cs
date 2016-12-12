@@ -3,7 +3,16 @@ using System.Collections;
 
 public class PhaseDefault : PhaseBase
 {
-    Hero target;
+    Hero _target;
+    Hero target
+    {
+        get { return _target; }
+        set
+        {
+            _target = value;
+            Boss.instance.highlight.SetTarget(value);
+        }
+    }
 
     public float slamRange = 6.0f;
     public float slamKnockback = 20.0f;

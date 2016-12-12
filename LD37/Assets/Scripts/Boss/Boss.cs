@@ -18,6 +18,7 @@ public class Boss : MonoBehaviour
 
     Animator anim;
     Rigidbody rb;
+    public BossTargetHighlight highlight;
 
     public void Awake()
     {

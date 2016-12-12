@@ -10,7 +10,7 @@ public class CameraController : MonoBehaviour
 
     Quaternion desRot;
 
-    float minDist = 7.5f;
+    float minDist = 10f;
 
     void Start()
     {
