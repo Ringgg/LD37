@@ -19,6 +19,9 @@ public class EffectSpawner : MonoBehaviour
     public GameObject slamEffect;
     public GameObject dmgEffect;
 
+    public GameObject lootRain;
+    public GameObject loot;
+
     public static void SpawnDotCircle(Vector3 position)
     {
         Instantiate(instance.dotCircle, position, Quaternion.identity);
@@ -73,6 +76,16 @@ public class EffectSpawner : MonoBehaviour
     {
         (Instantiate(instance.dmgEffect, Boss.instance.transform.position, Quaternion.identity) as GameObject)
             .GetComponent<DamageIndicator>().Init(damage);
+    }
+
+    public static void SpawnLootRain()
+    {
+        Instantiate(instance.lootRain, Boss.instance.transform.position, Quaternion.identity);
+    }
+
+    public static void SpawnLoot(Vector3 position)
+    {
+        Instantiate(instance.loot, position, Quaternion.identity);
     }
 
     void Awake()

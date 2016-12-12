@@ -89,7 +89,18 @@ public class Boss : MonoBehaviour
 
     public void Die()
     {
+        EffectSpawner.SpawnLootRain();
+        anim.SetTrigger("Die");
+        anim.transform.parent = null;
         EventManager.TriggerEvent(EventType.BossDied, this);
+
+        Vector3 pos;
+        foreach(Hero h in Hero.heroes)
+        {
+            pos = Random.insideUnitSphere * 4.0f;
+            pos.y = 0.0f;
+            h.movement.GoTo(pos + transform.position);
+        }
         Destroy(gameObject);        
     }
 }
