@@ -3,6 +3,7 @@ using System;
 
 public enum EventType
 {
+    GameStart,
     BossDied,
     HeroesKilled,
     BossAtHalfHp,

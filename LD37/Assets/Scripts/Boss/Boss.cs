@@ -17,6 +17,7 @@ public class Boss : MonoBehaviour
     public int hp;
 
     private bool died;
+    private bool started;
 
     Animator anim;
     Rigidbody rb;
@@ -36,6 +37,7 @@ public class Boss : MonoBehaviour
     void Start()
     {
         hp = maxHp;
+        EventManager.StartListening(EventType.GameStart, GameStart);
         EventManager.StartListening(EventType.EndAoePhase, GoDefault);
         EventManager.StartListening(EventType.EndZonePhase, GoDefault);
         EventManager.StartListening(EventType.EndGasPhase, GoDefault);
@@ -46,7 +48,7 @@ public class Boss : MonoBehaviour
     void Update()
     {
         anim.SetFloat("Speed", rb.velocity.magnitude);
-        if (curPhase == defaultPhase)
+        if (curPhase == defaultPhase && started)
         {
             if (Input.GetKeyDown(KeyCode.Q) && IsInDefault() && aoePhase.CanSwitch())
                 GoExplosionSpam();
@@ -110,5 +112,10 @@ public class Boss : MonoBehaviour
             h.movement.GoTo(pos + transform.position);
         }
         Destroy(gameObject);
+    }
+
+    public void GameStart()
+    {
+        started = true;
     }
 }
