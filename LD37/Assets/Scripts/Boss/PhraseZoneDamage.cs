@@ -11,9 +11,15 @@ public class PhraseZoneDamage : PhaseBase
 
     private float zoneActivationTimer;
 
-    void Update()
+    protected override void Awake()
+    {
+        base.Awake();
+    }
+
+    protected override void Update()
     {
         base.Update();
+        
         if (active)
         {
             if (durationTimer == 0) EventManager.TriggerEvent(EventType.EndZonePhase);
@@ -25,12 +31,14 @@ public class PhraseZoneDamage : PhaseBase
     public override void StartPhase()
     {
         base.StartPhase();
+        anim.SetBool("Channel", true);
         EnableMouseHovers();
     }
 
     public override void EndPhase()
     {
         base.EndPhase();
+        anim.SetBool("Channel", false);
         zoneActivationTimer = zoneActivationDelay;
         DisableMouseHovers();
     }

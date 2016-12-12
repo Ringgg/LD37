@@ -71,6 +71,7 @@ public class ExplosionPlane : AreaDanger
     void OnDisable()
     {
         CancelInvoke();
+        
         Hero.dangers.Remove(this);
     }
 

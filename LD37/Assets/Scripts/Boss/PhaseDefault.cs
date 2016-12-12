@@ -20,11 +20,13 @@ public class PhaseDefault : PhaseBase
     public float hitCdTimer;
     [HideInInspector]
     public float slamCdTimer;
-
-    void Awake()
+    
+    protected override void Awake()
     {
+        base.Awake();
         controller = GetComponent<Boss>();
         movement = GetComponent<Movement>();
+        anim = GetComponentInChildren<Animator>();
     }
 
     protected override void Update()
@@ -86,6 +88,7 @@ public class PhaseDefault : PhaseBase
         if (slamCdTimer > 0)
             return;
 
+        anim.SetTrigger("Slam");
         //movement.Halt();
         Hero tmp = target;
 
@@ -119,7 +122,7 @@ public class PhaseDefault : PhaseBase
 
     void Hit()
     {
-        // play animation
+        anim.SetTrigger("Attack");
 
         hitCdTimer = hitCd;
         target.GetThrown(1.0f);

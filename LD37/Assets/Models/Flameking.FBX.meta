@@ -111,10 +111,30 @@ ModelImporter:
     optimizeGameObjects: 0
     motionNodeName: 
     animationImportErrors: 
-    animationImportWarnings: 
+    animationImportWarnings: "\nClip 'Take 001' has import animation warnings that
+      might lower retargeting quality:\nNote: Activate translation DOF on avatar to
+      improve retargeting quality.\n\t'MaramaSpine3' is inbetween humanoid transforms
+      and has rotation animation that will be discarded.\n\t'MaramaRibcage' is inbetween
+      humanoid transforms and has rotation animation that will be discarded.\n\t'MaramaLForeArm2'
+      has translation animation that will be discarded.\n\t'MaramaLForeArm2' has scale
+      animation that will be discarded.\n\t'MaramaLPalm' is inbetween humanoid transforms
+      and has rotation animation that will be discarded.\n\t'MaramaLPalm' has scale
+      animation that will be discarded.\n\t'MaramaLThumb1' has scale animation that
+      will be discarded.\n\t'MaramaLThumb2' has scale animation that will be discarded.\n\t'MaramaLFingers1'
+      has translation animation that will be discarded.\n\t'MaramaLFingers1' has scale
+      animation that will be discarded.\n\t'MaramaLFingers2' has scale animation that
+      will be discarded.\n\t'MaramaRForeArm2' has translation animation that will
+      be discarded.\n\t'MaramaRForeArm2' has scale animation that will be discarded.\n\t'MaramaRPalm'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'MaramaRPalm'
+      has scale animation that will be discarded.\n\t'MaramaRThumb1' has scale animation
+      that will be discarded.\n\t'MaramaRThumb2' has scale animation that will be
+      discarded.\n\t'MaramaRFingers1' has translation animation that will be discarded.\n\t'MaramaRFingers1'
+      has scale animation that will be discarded.\n\t'MaramaRFingers2' has scale animation
+      that will be discarded.\n\t'MaramaLCalf' has translation animation that will
+      be discarded.\n\t'MaramaRCalf' has translation animation that will be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -142,7 +162,7 @@ ModelImporter:
       keepOriginalPositionXZ: 0
       heightFromFeet: 0
       mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      bodyMask: 00000000010000000100000000000000000000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
       transformMask:
@@ -264,7 +284,7 @@ ModelImporter:
       keepOriginalPositionXZ: 0
       heightFromFeet: 0
       mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      bodyMask: 00000000010000000100000000000000000000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
       transformMask:
@@ -283,21 +303,21 @@ ModelImporter:
       - path: MaramaPelvis
         weight: 1
       - path: MaramaPelvis/MaramaLThigh
-        weight: 1
+        weight: 0
       - path: MaramaPelvis/MaramaLThigh/MaramaLCalf
-        weight: 1
+        weight: 0
       - path: MaramaPelvis/MaramaLThigh/MaramaLCalf/MaramaLAnkle
-        weight: 1
+        weight: 0
       - path: MaramaPelvis/MaramaLThigh/MaramaLCalf/MaramaLAnkle/MaramaLToe
-        weight: 1
+        weight: 0
       - path: MaramaPelvis/MaramaRThigh
-        weight: 1
+        weight: 0
       - path: MaramaPelvis/MaramaRThigh/MaramaRCalf
-        weight: 1
+        weight: 0
       - path: MaramaPelvis/MaramaRThigh/MaramaRCalf/MaramaRAnkle
-        weight: 1
+        weight: 0
       - path: MaramaPelvis/MaramaRThigh/MaramaRCalf/MaramaRAnkle/MaramaRToe
-        weight: 1
+        weight: 0
       - path: MaramaPelvis/MaramaSpine1
         weight: 1
       - path: MaramaPelvis/MaramaSpine1/MaramaSpine2
@@ -362,8 +382,8 @@ ModelImporter:
         weight: 1
       - path: MaramaRPlatform
         weight: 1
-      maskType: 0
-      maskSource: {instanceID: 0}
+      maskType: 1
+      maskSource: {fileID: 101100000, guid: b01c60a5600187f44a0d7012cacd8ae1, type: 2}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
       name: raise
@@ -386,7 +406,7 @@ ModelImporter:
       keepOriginalPositionXZ: 0
       heightFromFeet: 0
       mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      bodyMask: 00000000010000000100000000000000000000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
       transformMask:
@@ -405,21 +425,21 @@ ModelImporter:
       - path: MaramaPelvis
         weight: 1
       - path: MaramaPelvis/MaramaLThigh
-        weight: 1
+        weight: 0
       - path: MaramaPelvis/MaramaLThigh/MaramaLCalf
-        weight: 1
+        weight: 0
       - path: MaramaPelvis/MaramaLThigh/MaramaLCalf/MaramaLAnkle
-        weight: 1
+        weight: 0
       - path: MaramaPelvis/MaramaLThigh/MaramaLCalf/MaramaLAnkle/MaramaLToe
-        weight: 1
+        weight: 0
       - path: MaramaPelvis/MaramaRThigh
-        weight: 1
+        weight: 0
       - path: MaramaPelvis/MaramaRThigh/MaramaRCalf
-        weight: 1
+        weight: 0
       - path: MaramaPelvis/MaramaRThigh/MaramaRCalf/MaramaRAnkle
-        weight: 1
+        weight: 0
       - path: MaramaPelvis/MaramaRThigh/MaramaRCalf/MaramaRAnkle/MaramaRToe
-        weight: 1
+        weight: 0
       - path: MaramaPelvis/MaramaSpine1
         weight: 1
       - path: MaramaPelvis/MaramaSpine1/MaramaSpine2
@@ -484,8 +504,8 @@ ModelImporter:
         weight: 1
       - path: MaramaRPlatform
         weight: 1
-      maskType: 0
-      maskSource: {instanceID: 0}
+      maskType: 1
+      maskSource: {fileID: 101100000, guid: b01c60a5600187f44a0d7012cacd8ae1, type: 2}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
       name: hold
@@ -508,7 +528,7 @@ ModelImporter:
       keepOriginalPositionXZ: 0
       heightFromFeet: 0
       mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      bodyMask: 00000000010000000100000000000000000000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
       transformMask:
@@ -527,21 +547,21 @@ ModelImporter:
       - path: MaramaPelvis
         weight: 1
       - path: MaramaPelvis/MaramaLThigh
-        weight: 1
+        weight: 0
       - path: MaramaPelvis/MaramaLThigh/MaramaLCalf
-        weight: 1
+        weight: 0
       - path: MaramaPelvis/MaramaLThigh/MaramaLCalf/MaramaLAnkle
-        weight: 1
+        weight: 0
       - path: MaramaPelvis/MaramaLThigh/MaramaLCalf/MaramaLAnkle/MaramaLToe
-        weight: 1
+        weight: 0
       - path: MaramaPelvis/MaramaRThigh
-        weight: 1
+        weight: 0
       - path: MaramaPelvis/MaramaRThigh/MaramaRCalf
-        weight: 1
+        weight: 0
       - path: MaramaPelvis/MaramaRThigh/MaramaRCalf/MaramaRAnkle
-        weight: 1
+        weight: 0
       - path: MaramaPelvis/MaramaRThigh/MaramaRCalf/MaramaRAnkle/MaramaRToe
-        weight: 1
+        weight: 0
       - path: MaramaPelvis/MaramaSpine1
         weight: 1
       - path: MaramaPelvis/MaramaSpine1/MaramaSpine2
@@ -606,8 +626,8 @@ ModelImporter:
         weight: 1
       - path: MaramaRPlatform
         weight: 1
-      maskType: 0
-      maskSource: {instanceID: 0}
+      maskType: 1
+      maskSource: {fileID: 101100000, guid: b01c60a5600187f44a0d7012cacd8ae1, type: 2}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
       name: tuskan
@@ -630,7 +650,7 @@ ModelImporter:
       keepOriginalPositionXZ: 0
       heightFromFeet: 0
       mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      bodyMask: 00000000010000000100000000000000000000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
       transformMask:
@@ -649,21 +669,21 @@ ModelImporter:
       - path: MaramaPelvis
         weight: 1
       - path: MaramaPelvis/MaramaLThigh
-        weight: 1
+        weight: 0
       - path: MaramaPelvis/MaramaLThigh/MaramaLCalf
-        weight: 1
+        weight: 0
       - path: MaramaPelvis/MaramaLThigh/MaramaLCalf/MaramaLAnkle
-        weight: 1
+        weight: 0
       - path: MaramaPelvis/MaramaLThigh/MaramaLCalf/MaramaLAnkle/MaramaLToe
-        weight: 1
+        weight: 0
       - path: MaramaPelvis/MaramaRThigh
-        weight: 1
+        weight: 0
       - path: MaramaPelvis/MaramaRThigh/MaramaRCalf
-        weight: 1
+        weight: 0
       - path: MaramaPelvis/MaramaRThigh/MaramaRCalf/MaramaRAnkle
-        weight: 1
+        weight: 0
       - path: MaramaPelvis/MaramaRThigh/MaramaRCalf/MaramaRAnkle/MaramaRToe
-        weight: 1
+        weight: 0
       - path: MaramaPelvis/MaramaSpine1
         weight: 1
       - path: MaramaPelvis/MaramaSpine1/MaramaSpine2
@@ -728,8 +748,8 @@ ModelImporter:
         weight: 1
       - path: MaramaRPlatform
         weight: 1
-      maskType: 0
-      maskSource: {instanceID: 0}
+      maskType: 1
+      maskSource: {fileID: 101100000, guid: b01c60a5600187f44a0d7012cacd8ae1, type: 2}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
       name: lower
@@ -752,7 +772,7 @@ ModelImporter:
       keepOriginalPositionXZ: 0
       heightFromFeet: 0
       mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      bodyMask: 00000000010000000100000000000000000000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
       transformMask:
@@ -771,21 +791,21 @@ ModelImporter:
       - path: MaramaPelvis
         weight: 1
       - path: MaramaPelvis/MaramaLThigh
-        weight: 1
+        weight: 0
       - path: MaramaPelvis/MaramaLThigh/MaramaLCalf
-        weight: 1
+        weight: 0
       - path: MaramaPelvis/MaramaLThigh/MaramaLCalf/MaramaLAnkle
-        weight: 1
+        weight: 0
       - path: MaramaPelvis/MaramaLThigh/MaramaLCalf/MaramaLAnkle/MaramaLToe
-        weight: 1
+        weight: 0
       - path: MaramaPelvis/MaramaRThigh
-        weight: 1
+        weight: 0
       - path: MaramaPelvis/MaramaRThigh/MaramaRCalf
-        weight: 1
+        weight: 0
       - path: MaramaPelvis/MaramaRThigh/MaramaRCalf/MaramaRAnkle
-        weight: 1
+        weight: 0
       - path: MaramaPelvis/MaramaRThigh/MaramaRCalf/MaramaRAnkle/MaramaRToe
-        weight: 1
+        weight: 0
       - path: MaramaPelvis/MaramaSpine1
         weight: 1
       - path: MaramaPelvis/MaramaSpine1/MaramaSpine2
@@ -850,8 +870,8 @@ ModelImporter:
         weight: 1
       - path: MaramaRPlatform
         weight: 1
-      maskType: 0
-      maskSource: {instanceID: 0}
+      maskType: 1
+      maskSource: {fileID: 101100000, guid: b01c60a5600187f44a0d7012cacd8ae1, type: 2}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
       name: death
@@ -1100,7 +1120,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 4
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1

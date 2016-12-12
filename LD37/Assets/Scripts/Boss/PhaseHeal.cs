@@ -16,8 +16,9 @@ public class PhaseHeal : PhaseBase
     [HideInInspector]
     public List<GameObject> healObjects = new List<GameObject>();
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         controller = GetComponent<Boss>();
         movement = GetComponent<Movement>();
     }
@@ -68,7 +69,7 @@ public class PhaseHeal : PhaseBase
         if (slamCdTimer > 0)
             return;
 
-        //movement.Halt();
+        anim.SetTrigger("Shout");
         Hero tmp = target;
 
         for (int i = Hero.heroes.Count - 1; i >= 0; --i)

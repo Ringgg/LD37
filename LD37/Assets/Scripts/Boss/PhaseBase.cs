@@ -14,6 +14,13 @@ public class PhaseBase : MonoBehaviour
     public float cooldownTimer;
     public float durationTimer;
 
+    protected Animator anim;
+
+    protected virtual void Awake()
+    {
+        anim = GetComponentInChildren<Animator>();
+    }
+
     protected virtual void Update()
     {
         if (active) durationTimer = Mathf.MoveTowards(durationTimer, 0, Time.deltaTime);

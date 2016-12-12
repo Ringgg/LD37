@@ -23,6 +23,8 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
+        if (Boss.instance == null)
+            return;
         tmp = Vector3.zero;
         foreach (Hero h in Hero.heroes)
             tmp += h.transform.position;

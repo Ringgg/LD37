@@ -10,8 +10,9 @@ public class PhaseExplosionSpam : PhaseBase
     public float spawnDelayTimer;
     bool readyToSpawn;
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         controller = GetComponent<Boss>();
         movement = GetComponent<Movement>();
     }
@@ -22,9 +23,17 @@ public class PhaseExplosionSpam : PhaseBase
         if (active)
         {
             if (durationTimer == 0)
+            {
+                anim.SetBool("Channel", false);
                 EventManager.TriggerEvent(EventType.EndAoePhase);
+                return;
+            }
 
+            bool last = readyToSpawn;
             readyToSpawn = Vector3.Distance(transform.position, holdPositionPt.position) < 0.5f;
+
+            if (!last && readyToSpawn)
+                anim.SetBool("Channel", true);
 
             if (!readyToSpawn)
             {
@@ -46,7 +55,7 @@ public class PhaseExplosionSpam : PhaseBase
 
     public override void EndPhase()
     {
-        base.EndPhase();
+        base.EndPhase();       
         readyToSpawn = false;
     }
     

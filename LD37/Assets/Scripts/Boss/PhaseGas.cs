@@ -19,12 +19,13 @@ public class PhaseGas : PhaseBase
 
     private List<GameObject> gasCircles = new List<GameObject>();
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         movement = GetComponent<Movement>();
     }
 
-    void Update()
+    protected override void Update()
     {
         base.Update();
         hitCdTimer = Mathf.MoveTowards(hitCdTimer, 0, Time.deltaTime);
@@ -85,7 +86,7 @@ public class PhaseGas : PhaseBase
 
     void Hit()
     {
-        // play animation
+        anim.SetTrigger("Attack");
 
         hitCdTimer = hitCooldown;
         target.GetThrown(1.0f);
@@ -115,7 +116,7 @@ public class PhaseGas : PhaseBase
         if (slamCdTimer > 0)
             return;
 
-        movement.Halt();
+        anim.SetTrigger("Shout");
         Hero tmp = target;
 
         for (int i = Hero.heroes.Count - 1; i >= 0; --i)

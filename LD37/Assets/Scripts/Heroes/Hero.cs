@@ -63,7 +63,6 @@ public class Hero : MonoBehaviour
     public void Die()
     {
         heroes.Remove(this);
-        Debug.Log(heroes.Count);
         if (heroes.Count == 0)
             EventManager.TriggerEvent(EventType.HeroesKilled);
         Destroy(gameObject);

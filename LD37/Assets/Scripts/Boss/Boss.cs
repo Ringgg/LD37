@@ -16,10 +16,15 @@ public class Boss : MonoBehaviour
     public int maxHp = 1000000;
     public int hp;
 
+    Animator anim;
+    Rigidbody rb;
+
     public void Awake()
     {
         instance = this;
         movement = GetComponent<Movement>();
+        anim = GetComponentInChildren<Animator>();
+        rb = GetComponent<Rigidbody>();
     }
 
     void Start()
@@ -34,6 +39,7 @@ public class Boss : MonoBehaviour
 
     void Update()
     {
+        anim.SetFloat("Speed", rb.velocity.magnitude);
         if (curPhase == defaultPhase)
         {
             if (Input.GetKeyDown(KeyCode.Q) && IsInDefault() && aoePhase.CanSwitch())
