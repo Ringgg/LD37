@@ -86,7 +86,8 @@ public class PhaseDefault : PhaseBase
         if (slamCdTimer > 0)
             return;
 
-        movement.Halt();
+        //movement.Halt();
+        Hero tmp = target;
 
         for (int i = Hero.heroes.Count -1; i >= 0; --i)
         {
@@ -110,9 +111,9 @@ public class PhaseDefault : PhaseBase
             target.GetComponent<Rigidbody>().AddForce(dir * (slamKnockback), ForceMode.Impulse);
         }
 
+        target = tmp;
         EffectSpawner.SpawnSlamEffect(transform.position, transform.rotation);
-
-        target = null;
+        
         slamCdTimer = slamCd;
     }
 

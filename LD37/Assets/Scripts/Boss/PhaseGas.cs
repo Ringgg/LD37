@@ -116,6 +116,7 @@ public class PhaseGas : PhaseBase
             return;
 
         movement.Halt();
+        Hero tmp = target;
 
         for (int i = Hero.heroes.Count - 1; i >= 0; --i)
         {
@@ -134,7 +135,8 @@ public class PhaseGas : PhaseBase
             Vector3 dir = -(target.transform.position - transform.position).normalized + (Vector3.up * .5f);
             target.GetComponent<Rigidbody>().AddForce(dir * (slamKnockback), ForceMode.Impulse);
         }
-        target = null;
+
+        target = tmp;
         slamCdTimer = slamCooldown;
     }
 
